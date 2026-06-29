@@ -4,3 +4,5 @@ dist/
 changelog/
 .svelte-kit/
 packages/site/build/
+
+.vercel
