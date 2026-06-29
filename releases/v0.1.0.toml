@@ -1,0 +1,16 @@
+version = "0.1.0"
+date = "2026-06-29"
+name = "First Ship"
+summary = "The initial release. Editorial mode only — write your releases, get beautiful output."
+
+[sections.new]
+
+[[sections.new.items]]
+text = "Release file format (TOML) with validation"
+
+[[sections.new.items]]
+text = "Markdown changelog output"
+link = "https://github.com/Shaelz/ship-notes/pull/1"
+
+[[sections.new.items]]
+text = "ship-notes build command"
