@@ -1,21 +1,20 @@
 # Roadmap
 
-## v1.0 — Editorial foundation
+## v1.0 — Editorial foundation ✓
 
 The core loop: write a release file, get beautiful output.
 
-- [ ] `release.toml` schema and parser
-- [ ] CLI: `ship-notes add` — scaffolds a new release file
-- [ ] CLI: `ship-notes build` — assembles releases into output
-- [ ] Output: Markdown (`CHANGELOG.md`)
-- [ ] Output: HTML (single file, portable)
-- [ ] SvelteKit changelog site
-  - [ ] Version list sidebar
-  - [ ] Per-version release page
-  - [ ] Breaking change visual treatment (badge/indicator)
-  - [ ] Current version indicator
-  - [ ] RSS feed (`feed.xml`)
-- [ ] `ship-notes.toml` project config (output paths, site title, repo URL)
+- [x] `release.toml` schema and parser
+- [x] CLI: `ship-notes add` — scaffolds a new release file
+- [x] CLI: `ship-notes build` — assembles releases into `changelog/CHANGELOG.md`
+- [x] SvelteKit changelog site
+  - [x] Version list sidebar
+  - [x] Per-version release page
+  - [x] Breaking change visual treatment (badge/indicator)
+  - [x] Current version indicator
+  - [x] RSS feed (`feed.xml`)
+- [x] `ship-notes.toml` project config (output paths, site title, repo URL)
+- [x] Vercel deployment with custom domain
 
 ## v1.1 — Audience targeting
 
@@ -26,11 +25,11 @@ Write once, render differently for end users vs. developers consuming an API.
 - [ ] CLI flag: `ship-notes build --audience developers`
 - [ ] Site: audience switcher UI
 
-## v1.2 — Publishing
+## v1.2 — CLI completeness
 
-- [ ] `ship-notes publish` — deploy to configured host
-- [ ] Static host adapters: Netlify, Vercel, GitHub Pages
+- [ ] `ship-notes open` — open the deployed changelog in the browser
 - [ ] Email digest output (HTML, ready to paste into a mailer)
+- [ ] Non-Vercel hosting support (Netlify, GitHub Pages adapters) — for users not on Vercel auto-deploy
 
 ## v2.0 — Generation mode
 
@@ -38,6 +37,7 @@ Write once, render differently for end users vs. developers consuming an API.
 - [ ] Rule-based: commit prefix mapping (`feat:` → new, `fix:` → fixed, etc.)
 - [ ] AI-assisted: rewrite commit messages into user-facing prose
 - [ ] Always outputs a draft for editorial review — never auto-publishes
+- [ ] GitHub Action: trigger `ship-notes draft` automatically on tag push
 
 ## Technical debt
 
@@ -49,4 +49,3 @@ Write once, render differently for end users vs. developers consuming an API.
 - Date-based version schemes
 - Per-project vs. central multi-project tracking
 - Hosted changelog service (ship-notes.io or similar)
-- GitHub Action for automatic draft generation on tag push
