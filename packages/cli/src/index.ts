@@ -4,8 +4,9 @@ import { resolve, join } from "node:path";
 import { parseReleaseFile, ParseError } from "./parse.js";
 import { renderChangelog } from "./render/markdown.js";
 import { compareSemver } from "./semver.js";
+import { add } from "./add.js";
 
-const [, , command = "help"] = process.argv;
+const [, , command = "help", ...args] = process.argv;
 
 function build(): void {
   const cwd = process.cwd();
@@ -59,9 +60,13 @@ switch (command) {
   case "build":
     build();
     break;
+  case "add":
+    add(args[0]);
+    break;
   default:
     console.log("Usage: ship-notes <command>");
     console.log("");
     console.log("Commands:");
-    console.log("  build   Assemble releases/ into changelog/CHANGELOG.md");
+    console.log("  add [patch|minor|major|<version>]   Scaffold a new release file");
+    console.log("  build                               Assemble releases/ into changelog/CHANGELOG.md");
 }
