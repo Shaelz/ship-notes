@@ -5,23 +5,25 @@ import { parseReleaseFile, ParseError } from "./parse.js";
 import { renderChangelog } from "./render/markdown.js";
 import { compareSemver } from "./semver.js";
 import { add } from "./add.js";
+import { loadConfig } from "./config.js";
 
 const [, , command = "help", ...args] = process.argv;
 
 function build(): void {
   const cwd = process.cwd();
-  const releasesDir = resolve(cwd, "releases");
+  const config = loadConfig(cwd);
+  const releasesDir = resolve(cwd, config.releases_dir ?? "releases");
 
   let files: string[];
   try {
     files = readdirSync(releasesDir).filter((f) => f.endsWith(".toml"));
   } catch {
-    console.error("Error: no releases/ directory found. Run from your project root.");
+    console.error(`Error: no ${config.releases_dir}/ directory found. Run from your project root.`);
     process.exit(1);
   }
 
   if (files.length === 0) {
-    console.error("Error: no .toml files found in releases/");
+    console.error(`Error: no .toml files found in ${config.releases_dir}/`);
     process.exit(1);
   }
 
@@ -46,14 +48,14 @@ function build(): void {
 
   releases.sort((a, b) => compareSemver(a.version, b.version));
 
-  const outDir = resolve(cwd, "changelog");
+  const outDir = resolve(cwd, config.output_dir ?? "changelog");
   mkdirSync(outDir, { recursive: true });
 
   const markdown = renderChangelog(releases);
   const outPath = join(outDir, "CHANGELOG.md");
   writeFileSync(outPath, markdown, "utf-8");
 
-  console.log(`Built ${releases.length} release(s) → changelog/CHANGELOG.md`);
+  console.log(`Built ${releases.length} release(s) → ${config.output_dir}/CHANGELOG.md`);
 }
 
 switch (command) {
