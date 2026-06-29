@@ -3,3 +3,4 @@ dist/
 *.js.map
 changelog/
 .svelte-kit/
+packages/site/build/
