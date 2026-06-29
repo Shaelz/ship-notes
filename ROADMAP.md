@@ -39,6 +39,10 @@ Write once, render differently for end users vs. developers consuming an API.
 - [ ] AI-assisted: rewrite commit messages into user-facing prose
 - [ ] Always outputs a draft for editorial review — never auto-publishes
 
+## Technical debt
+
+- Extract `packages/core` — shared package exporting the release schema (Zod), TOML parser, and semver utilities. Currently duplicated between `packages/cli` and `packages/site`. Both packages should depend on `@ship-notes/core` instead.
+
 ## Deferred / maybe
 
 - Contributor credits per item
