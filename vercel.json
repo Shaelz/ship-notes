@@ -1,0 +1,5 @@
+{
+  "buildCommand": "pnpm --filter @ship-notes/site build",
+  "outputDirectory": "packages/site/build",
+  "installCommand": "pnpm install"
+}
