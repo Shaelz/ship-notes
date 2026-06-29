@@ -1,0 +1,20 @@
+version = "0.2.0"
+date    = "2026-06-29"
+name    = "The Site"
+summary = "Changelog site, RSS feed, and project config. The tool now produces something you can actually publish."
+
+[sections.new]
+
+[[sections.new.items]]
+text = "SvelteKit static changelog site with sidebar version history and current release indicator"
+
+[[sections.new.items]]
+text = "RSS feed at /feed.xml"
+
+[[sections.new.items]]
+text = "ship-notes.toml project config — set title, url, repo, and custom output paths"
+
+[sections.changed]
+
+[[sections.changed.items]]
+text = "build command now respects releases_dir and output_dir from ship-notes.toml"

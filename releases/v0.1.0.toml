@@ -10,7 +10,6 @@ text = "Release file format (TOML) with validation"
 
 [[sections.new.items]]
 text = "Markdown changelog output"
-link = "https://github.com/Shaelz/ship-notes/pull/1"
 
 [[sections.new.items]]
 text = "ship-notes build command"
