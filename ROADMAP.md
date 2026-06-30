@@ -66,6 +66,7 @@ Write once, render differently for end users vs. developers consuming an API.
 ## Technical debt
 
 - Extract `packages/core` — shared package exporting the release schema (Zod), TOML parser, and semver utilities. Currently duplicated between `packages/cli` and `packages/site`. Both packages should depend on `@ship-notes/core` instead.
+- Social preview image — GitHub repo has no OG image; a simple branded card would improve shareability.
 
 ## Deferred / maybe
 
