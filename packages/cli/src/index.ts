@@ -62,9 +62,11 @@ function build(): void {
     try {
       const release = parseReleaseFile(join(releasesDir, file));
       if (defaultAuthor) {
+        const defaultAuthorUrl = config.default_author_url || '';
         for (const section of Object.values(release.sections)) {
           for (const item of section.items) {
             if (!item.author) item.author = defaultAuthor;
+            if (!item.author_url && defaultAuthorUrl) item.author_url = defaultAuthorUrl;
           }
         }
       }

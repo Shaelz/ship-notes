@@ -32,8 +32,9 @@
               <a class="item-link" href={item.link} target="_blank" rel="noopener">#</a>
             {/if}
             {#if item.author}
-              {#if item.link}
-                <a class="item-author" href={item.link} target="_blank" rel="noopener">{item.author}</a>
+              {@const authorHref = item.link ?? item.author_url}
+              {#if authorHref}
+                <a class="item-author" href={authorHref} target="_blank" rel="noopener">{item.author}</a>
               {:else}
                 <span class="item-author">{item.author}</span>
               {/if}

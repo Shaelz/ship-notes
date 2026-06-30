@@ -10,6 +10,7 @@ const ConfigSchema = z.object({
   releases_dir: z.string().optional(),
   output_dir: z.string().optional(),
   default_author: z.string().optional(),
+  default_author_url: z.string().url('default_author_url must be a valid URL').optional(),
   notify_webhook: z.string().url('notify_webhook must be a valid URL').optional(),
 });
 
@@ -24,6 +25,7 @@ const DEFAULTS: ResolvedConfig = {
   releases_dir: 'releases',
   output_dir: 'changelog',
   default_author: '',
+  default_author_url: '',
   notify_webhook: '',
 };
 

@@ -10,6 +10,7 @@ const Item = z.object({
   link: z.string().url().optional(),
   breaking: z.boolean().optional(),
   author: z.string().optional(),
+  author_url: z.string().url().optional(),
 });
 
 const Section = z.object({
@@ -32,6 +33,7 @@ const SiteConfigSchema = z.object({
   title: z.string().optional(),
   url: z.string().url().optional(),
   default_author: z.string().optional(),
+  default_author_url: z.string().url().optional(),
 });
 
 export type SiteConfig = z.infer<typeof SiteConfigSchema>;
@@ -88,6 +90,7 @@ export function loadReleases(config?: SiteConfig, releasesDir?: string): Release
       for (const section of Object.values(release.sections)) {
         for (const item of section.items) {
           if (!item.author) item.author = cfg.default_author;
+          if (!item.author_url && cfg.default_author_url) item.author_url = cfg.default_author_url;
         }
       }
     }

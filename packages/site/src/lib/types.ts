@@ -3,6 +3,7 @@ export type ReleaseItem = {
   link?: string;
   breaking?: boolean;
   author?: string;
+  author_url?: string;
 };
 
 export type ReleaseSection = {

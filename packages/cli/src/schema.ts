@@ -5,6 +5,7 @@ const Item = z.object({
   link: z.string().url("Item link must be a valid URL").optional(),
   breaking: z.boolean().optional(),
   author: z.string().optional(),
+  author_url: z.string().url("author_url must be a valid URL").optional(),
 });
 
 const Section = z.object({
