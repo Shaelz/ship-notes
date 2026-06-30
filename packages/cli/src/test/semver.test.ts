@@ -1,6 +1,6 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { parseSemver, compareSemver } from '../semver.js';
+import { parseSemver, compareSemver } from '@ship-notes/core';
 
 describe('parseSemver', () => {
   it('parses a standard version', () => {

@@ -1,6 +1,6 @@
 import { resolve } from 'node:path';
 import { renderChangelog } from './render/markdown.js';
-import { compareSemver } from './semver.js';
+import { compareSemver } from '@ship-notes/core';
 import { loadConfig } from './config.js';
 import { loadReleasesOrExit, applyDefaultAuthor } from './releases.js';
 

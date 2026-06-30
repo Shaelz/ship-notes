@@ -1,8 +1,7 @@
 import { resolve } from 'node:path';
 import { loadConfig } from './config.js';
 import { loadReleasesOrExit, applyDefaultAuthor } from './releases.js';
-import { SECTION_DEFAULTS, SECTION_ORDER, type StandardSectionKey } from './schema.js';
-import type { Release } from './schema.js';
+import { SECTION_DEFAULTS, SECTION_ORDER, type StandardSectionKey, type Release } from '@ship-notes/core';
 
 function formatSummary(release: Release, siteUrl: string): string {
   const title = release.name

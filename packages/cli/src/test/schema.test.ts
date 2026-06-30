@@ -1,6 +1,6 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { ReleaseSchema } from '../schema.js';
+import { ReleaseSchema } from '@ship-notes/core';
 
 const validRelease = {
   version: '1.0.0',

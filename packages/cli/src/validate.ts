@@ -1,6 +1,6 @@
 import { readdirSync } from 'node:fs';
 import { resolve, join } from 'node:path';
-import { parseReleaseFile, ParseError } from './parse.js';
+import { parseReleaseFile, ParseError } from '@ship-notes/core';
 import { loadConfig } from './config.js';
 
 export function validate(): void {

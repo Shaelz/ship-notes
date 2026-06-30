@@ -1,5 +1,4 @@
-import type { Release } from '../schema.js';
-import { SECTION_DEFAULTS, SECTION_ORDER, type StandardSectionKey } from '../schema.js';
+import { SECTION_DEFAULTS, SECTION_ORDER, type Release, type StandardSectionKey } from '@ship-notes/core';
 
 function e(str: string): string {
   return str

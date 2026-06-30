@@ -1,7 +1,6 @@
 import { readdirSync, writeFileSync, existsSync, mkdirSync } from "node:fs";
 import { resolve, join } from "node:path";
-import { parseSemver, compareSemver } from "./semver.js";
-import { parseReleaseFile } from "./parse.js";
+import { parseSemver, compareSemver, parseReleaseFile } from "@ship-notes/core";
 
 type BumpType = "patch" | "minor" | "major";
 

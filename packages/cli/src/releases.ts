@@ -1,8 +1,6 @@
 import { readdirSync } from 'node:fs';
 import { join } from 'node:path';
-import { parseReleaseFile, ParseError } from './parse.js';
-import { compareSemver } from './semver.js';
-import type { Release } from './schema.js';
+import { parseReleaseFile, ParseError, compareSemver, type Release } from '@ship-notes/core';
 import type { ResolvedConfig } from './config.js';
 
 export function loadReleasesOrExit(releasesDir: string): Release[] {

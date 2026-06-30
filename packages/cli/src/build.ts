@@ -1,9 +1,8 @@
 import { readdirSync, writeFileSync, mkdirSync } from 'node:fs';
 import { resolve, join } from 'node:path';
 import { execSync } from 'node:child_process';
-import { parseReleaseFile, ParseError } from './parse.js';
+import { parseReleaseFile, ParseError, compareSemver } from '@ship-notes/core';
 import { renderChangelog } from './render/markdown.js';
-import { compareSemver } from './semver.js';
 import { applyDefaultAuthor } from './releases.js';
 import { loadConfig } from './config.js';
 
