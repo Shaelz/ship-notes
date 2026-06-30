@@ -1,4 +1,4 @@
-import { SECTION_DEFAULTS, SECTION_ORDER, type Release, type StandardSectionKey } from '@ship-notes/core';
+import { orderedSections, type Release } from '@ship-notes/core';
 
 function e(str: string): string {
   return str
@@ -13,15 +13,7 @@ export function renderDigest(release: Release): string {
     ? `v${release.version} — ${release.name}`
     : `v${release.version}`;
 
-  const standardKeys = SECTION_ORDER.filter((k) => release.sections[k] !== undefined);
-  const extraKeys = Object.keys(release.sections).filter(
-    (k) => !SECTION_ORDER.includes(k as StandardSectionKey)
-  );
-
-  const sectionsHtml = [...standardKeys, ...extraKeys].map((key) => {
-    const section = release.sections[key];
-    if (!section) return '';
-    const label = section.label ?? SECTION_DEFAULTS[key as StandardSectionKey] ?? key;
+  const sectionsHtml = orderedSections(release).map(({ label, section }) => {
 
     const items = section.items.map((item) => {
       const breaking = item.breaking ? ' <strong>[breaking]</strong>' : '';

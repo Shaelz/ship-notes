@@ -1,7 +1,7 @@
 import { resolve } from 'node:path';
 import { loadConfig } from './config.js';
 import { loadReleasesOrExit, applyDefaultAuthor } from './releases.js';
-import { SECTION_DEFAULTS, SECTION_ORDER, type StandardSectionKey, type Release } from '@ship-notes/core';
+import { orderedSections, type Release } from '@ship-notes/core';
 
 function formatSummary(release: Release, siteUrl: string): string {
   const title = release.name
@@ -11,18 +11,10 @@ function formatSummary(release: Release, siteUrl: string): string {
   const url = siteUrl ? `${siteUrl}/v/${release.version}` : '';
   const header = url ? `*${title}*  ${url}` : `*${title}*`;
 
-  const standardKeys = SECTION_ORDER.filter((k) => release.sections[k] !== undefined);
-  const extraKeys = Object.keys(release.sections).filter(
-    (k) => !SECTION_ORDER.includes(k as StandardSectionKey)
-  );
-
   const lines: string[] = [header, release.date];
   if (release.summary) lines.push('', release.summary);
 
-  for (const key of [...standardKeys, ...extraKeys]) {
-    const section = release.sections[key];
-    if (!section) continue;
-    const label = section.label ?? SECTION_DEFAULTS[key as StandardSectionKey] ?? key;
+  for (const { label, section } of orderedSections(release)) {
     lines.push('', `*${label}*`);
     for (const item of section.items) {
       const breaking = item.breaking ? ' [breaking]' : '';
