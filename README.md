@@ -12,7 +12,7 @@ You stay in control of the words. The tool handles the formatting, sorting, and 
 
 ## Modes
 
-**Editorial mode** (v1) — you write a `releases/v1.2.0.toml` file per release. ship-notes makes it beautiful on output. Markdown, HTML, or structured JSON/TOML for downstream use.
+**Editorial mode** (v1) — you write a `releases/v1.2.0.toml` file per release. ship-notes makes it beautiful on output. Markdown or a prerendered static site with RSS.
 
 **Generation mode** (planned) — feed it commits, get a draft back. Rule-based (commit prefix parsing) or AI-assisted. Always editorial-review before publish.
 
@@ -20,8 +20,9 @@ You stay in control of the words. The tool handles the formatting, sorting, and 
 
 ```toml
 version = "1.2.0"
-date = "2026-06-29"
-name = "Summer Update"        # optional display name
+date    = "2026-06-29"
+name    = "Summer Update"     # optional display name
+summary = "One-line blurb shown above the sections."  # optional
 
 [sections.new]
 label = "What's New"          # optional, defaults to "New"
@@ -31,12 +32,8 @@ text = "Dark mode support across all pages"
 
 [[sections.new.items]]
 text = "Export to PDF"
-pr = "https://github.com/user/repo/pull/42"
-
-[sections.fixed]
-
-[[sections.fixed.items]]
-text = "Crash on empty project list"
+link = "https://github.com/user/repo/pull/42"
+author = "Gerben"
 
 [sections.changed]
 
@@ -47,56 +44,99 @@ breaking = true
 
 ### Standard sections
 
-| Key        | Default label |
-|------------|---------------|
-| `new`      | New           |
-| `fixed`    | Fixed         |
-| `changed`  | Changed       |
-| `removed`  | Removed       |
+| Key       | Default label |
+|-----------|---------------|
+| `new`     | New           |
+| `fixed`   | Fixed         |
+| `changed` | Changed       |
+| `removed` | Removed       |
 
 Any section label can be overridden. Extra sections (e.g. `migration`, `known_issues`) are supported as free-form entries.
 
 ### Item fields
 
-| Field      | Type    | Required | Description                          |
-|------------|---------|----------|--------------------------------------|
-| `text`     | string  | yes      | The human-readable change description |
-| `pr`       | string  | no       | Link to the pull request or issue    |
-| `breaking` | boolean | no       | Marks the item as a breaking change  |
+| Field      | Type    | Required | Description                                      |
+|------------|---------|----------|--------------------------------------------------|
+| `text`     | string  | yes      | The human-readable change description            |
+| `link`     | string  | no       | URL to the pull request, issue, or reference     |
+| `breaking` | boolean | no       | Marks the item as a breaking change              |
+| `author`   | string  | no       | Contributor credit — overrides `default_author`  |
+
+## Project config (`ship-notes.toml`)
+
+```toml
+title          = "My Project"
+url            = "https://changelog.myproject.com"
+repo           = "https://github.com/user/repo"
+default_author = "Gerben"   # applied to all items without an explicit author field
+                             # falls back to git config user.name if not set
+
+# releases_dir = "releases"   # default
+# output_dir   = "changelog"  # default
+```
 
 ## Project structure
 
 ```
 your-project/
-├── ship-notes.toml       # project config (audience, output format, site settings)
+├── ship-notes.toml
 ├── releases/
 │   ├── v1.2.0.toml
 │   ├── v1.1.0.toml
 │   └── v1.0.0.toml
-└── changelog/            # generated output (gitignore or commit, your call)
-    ├── index.html
-    ├── feed.xml
+└── changelog/            # generated output — gitignore or commit, your call
     └── CHANGELOG.md
 ```
 
 ## CLI
 
 ```sh
-ship-notes add            # scaffold a new release file for the next version
-ship-notes build          # assemble all releases into output formats
-ship-notes publish        # build + deploy to configured host
+ship-notes add [patch|minor|major|<version>]   # scaffold a new release file
+ship-notes build                               # assemble releases/ into changelog/CHANGELOG.md
 ```
+
+## Site
+
+The changelog site is a SvelteKit static site in `packages/site`. It reads `releases/*.toml` directly.
+
+**Development** — the site reads release files live on every request, no build step needed:
+
+```sh
+pnpm --filter @ship-notes/site dev
+```
+
+**Production build** — prerenders all release pages to static HTML:
+
+```sh
+pnpm --filter @ship-notes/site build
+```
+
+## Deployment
+
+The site outputs static files and deploys anywhere that serves HTML. The repo uses Vercel with auto-deploy on push to `main`.
+
+**Vercel setup:**
+
+```json
+{
+  "buildCommand": "pnpm --filter @ship-notes/site build",
+  "outputDirectory": "packages/site/build",
+  "installCommand": "pnpm install"
+}
+```
+
+This `vercel.json` is already included in the repo.
 
 ## Aesthetic
 
-The published changelog site follows a retro software release page aesthetic — version numbers as section headers, a sidebar version history, a persistent current-version indicator. Intentional retro, not ironic.
+Retro software release page — version numbers as large headers, sidebar version history, current release indicator. Space Mono throughout. Intentional retro, not ironic.
 
 ## Stack
 
-- **CLI**: Node.js
-- **Site**: SvelteKit, prerendered static output
+- **CLI**: Node.js, TypeScript, smol-toml, Zod
+- **Site**: SvelteKit, prerendered static output, adapter-static
 - **Storage**: file-based, local-first, no database
 
 ## Status
 
-Early development. See [ROADMAP.md](ROADMAP.md).
+v1.0 shipped. See [ROADMAP.md](ROADMAP.md).
