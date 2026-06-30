@@ -7,6 +7,9 @@ import { renderChangelog } from "./render/markdown.js";
 import { compareSemver } from "./semver.js";
 import { add } from "./add.js";
 import { init } from "./init.js";
+import { open } from "./open.js";
+import { diff } from "./diff.js";
+import { digest } from "./digest.js";
 import { loadConfig } from "./config.js";
 
 function gitAuthorName(): string {
@@ -88,6 +91,15 @@ switch (command) {
   case "add":
     add(args[0]);
     break;
+  case "open":
+    open();
+    break;
+  case "diff":
+    diff(args[0]);
+    break;
+  case "digest":
+    digest(args[0]);
+    break;
   default:
     console.log("Usage: ship-notes <command>");
     console.log("");
@@ -95,4 +107,7 @@ switch (command) {
     console.log("  init                                Set up ship-notes in a new project");
     console.log("  add [patch|minor|major|<version>]   Scaffold a new release file");
     console.log("  build                               Assemble releases/ into changelog/CHANGELOG.md");
+    console.log("  open                                Open the deployed changelog in the browser");
+    console.log("  diff [<version>|<v1>..<v2>]         Print release(s) as Markdown to stdout");
+    console.log("  digest [<version>]                  Write an HTML email digest to changelog/");
 }

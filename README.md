@@ -94,6 +94,9 @@ your-project/
 ship-notes init                                # set up ship-notes in a new project
 ship-notes add [patch|minor|major|<version>]   # scaffold a new release file
 ship-notes build                               # assemble releases/ into changelog/CHANGELOG.md
+ship-notes open                                # open the deployed changelog in the browser
+ship-notes diff [<version>|<v1>..<v2>]         # print release(s) as Markdown to stdout
+ship-notes digest [<version>]                  # write an HTML email digest to changelog/
 ```
 
 ### Getting started
@@ -129,19 +132,13 @@ pnpm --filter @ship-notes/site build
 
 ## Deployment
 
-The site outputs static files and deploys anywhere that serves HTML. The repo uses Vercel with auto-deploy on push to `main`.
+The site outputs static files and deploys anywhere that serves HTML.
 
-**Vercel setup:**
+**Vercel** — `vercel.json` is included. Connect the repo and push.
 
-```json
-{
-  "buildCommand": "pnpm --filter @ship-notes/site build",
-  "outputDirectory": "packages/site/build",
-  "installCommand": "pnpm install"
-}
-```
+**Netlify** — `packages/site/netlify.toml` is included. Connect the repo and push.
 
-This `vercel.json` is already included in the repo.
+**GitHub Pages** — `.github/workflows/deploy-pages.yml` is included. Enable Pages in repo settings (source: GitHub Actions), then push.
 
 ## Aesthetic
 

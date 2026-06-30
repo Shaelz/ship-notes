@@ -26,12 +26,12 @@ Write once, render differently for end users vs. developers consuming an API.
 - [ ] `ship-notes preview --audience <name>` — local dev server filtered to that audience
 - [ ] Site: audience switcher UI
 
-## v1.2 — CLI completeness
+## v1.2 — CLI completeness ✓
 
-- [ ] `ship-notes open` — open the deployed changelog in the browser
-- [ ] `ship-notes diff <v1>..<v2>` — print what changed between two releases as Markdown (for GitHub release notes, Slack posts, etc.)
-- [ ] Email digest output (HTML, ready to paste into a mailer)
-- [ ] Non-Vercel hosting support (Netlify, GitHub Pages adapters) — for users not on Vercel auto-deploy
+- [x] `ship-notes open` — open the deployed changelog in the browser
+- [x] `ship-notes diff [<version>|<v1>..<v2>]` — print release(s) as Markdown to stdout
+- [x] `ship-notes digest [<version>]` — write an HTML email digest to `changelog/`
+- [x] Non-Vercel hosting support — `netlify.toml` and GitHub Pages workflow included
 
 ## v1.3 — Onboarding & personality
 

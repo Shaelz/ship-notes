@@ -1,0 +1,7 @@
+[build]
+  command       = "pnpm --filter @ship-notes/site build"
+  publish       = "packages/site/build"
+  base          = "."
+
+[build.environment]
+  NODE_VERSION  = "20"
