@@ -1,5 +1,6 @@
 {
   "buildCommand": "pnpm --filter @ship-notes/core build && pnpm --filter @ship-notes/site build",
   "outputDirectory": "packages/site/build",
-  "installCommand": "pnpm install"
+  "installCommand": "pnpm install",
+  "cleanUrls": true
 }
