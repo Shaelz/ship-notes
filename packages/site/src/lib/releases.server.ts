@@ -29,9 +29,12 @@ const ReleaseSchema = z.object({
 });
 
 const SiteConfigSchema = z.object({
+  title: z.string().optional(),
   url: z.string().url().optional(),
   default_author: z.string().optional(),
 });
+
+export type SiteConfig = z.infer<typeof SiteConfigSchema>;
 
 function gitAuthorName(): string {
   try {
@@ -41,17 +44,18 @@ function gitAuthorName(): string {
   }
 }
 
-export function loadSiteConfig(root: string): { default_author?: string; url?: string } {
-  const fallback = gitAuthorName();
+export const REPO_ROOT = resolve(process.cwd(), '../..');
+
+export function loadSiteConfig(root: string = REPO_ROOT): SiteConfig {
   const configPath = resolve(root, 'ship-notes.toml');
-  if (!existsSync(configPath)) return { default_author: fallback };
+  if (!existsSync(configPath)) return { default_author: gitAuthorName() };
   const parsed = parseTOML(readFileSync(configPath, 'utf-8'));
   const result = SiteConfigSchema.safeParse(parsed);
   if (!result.success) {
     console.warn('ship-notes.toml has invalid fields (using defaults)');
-    return { default_author: fallback };
+    return { default_author: gitAuthorName() };
   }
-  return { default_author: result.data.default_author || fallback };
+  return { ...result.data, default_author: result.data.default_author || gitAuthorName() };
 }
 
 function parseSemver(version: string): [number, number, number] {
@@ -68,10 +72,9 @@ function compareSemver(a: string, b: string): number {
   return bPat - aPat;
 }
 
-export function loadReleases(releasesDir?: string): Release[] {
-  const root = resolve(process.cwd(), '../..');
-  const dir = releasesDir ?? resolve(root, 'releases');
-  const config = loadSiteConfig(root);
+export function loadReleases(config?: SiteConfig, releasesDir?: string): Release[] {
+  const cfg = config ?? loadSiteConfig();
+  const dir = releasesDir ?? resolve(REPO_ROOT, 'releases');
   const files = readdirSync(dir).filter((f) => f.endsWith('.toml'));
 
   const releases: Release[] = [];
@@ -81,12 +84,10 @@ export function loadReleases(releasesDir?: string): Release[] {
     const result = ReleaseSchema.safeParse(parsed);
     if (!result.success) continue;
     const release = result.data;
-    if (config.default_author) {
+    if (cfg.default_author) {
       for (const section of Object.values(release.sections)) {
         for (const item of section.items) {
-          if (!item.author) {
-            item.author = config.default_author;
-          }
+          if (!item.author) item.author = cfg.default_author;
         }
       }
     }

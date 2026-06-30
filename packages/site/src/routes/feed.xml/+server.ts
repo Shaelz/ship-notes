@@ -1,6 +1,5 @@
 import { loadReleases, loadSiteConfig } from '$lib/releases.server';
 import { orderedSections } from '$lib/types';
-import { resolve } from 'node:path';
 
 export const prerender = true;
 
@@ -30,18 +29,19 @@ function releaseDescription(release: ReturnType<typeof loadReleases>[number]): s
 }
 
 export function GET() {
-  const releases = loadReleases();
-  const config = loadSiteConfig(resolve(process.cwd(), '../..'));
+  const config = loadSiteConfig();
+  const releases = loadReleases(config);
   const siteUrl = config.url ?? 'https://example.com';
+  const title = config.title ?? 'Releases';
 
   const items = releases.map((release) => {
-    const title = release.name
+    const releaseTitle = release.name
       ? `v${release.version} — ${release.name}`
       : `v${release.version}`;
 
     return `
     <item>
-      <title>${escape(title)}</title>
+      <title>${escape(releaseTitle)}</title>
       <link>${escape(siteUrl)}/v/${escape(release.version)}</link>
       <guid isPermaLink="true">${escape(siteUrl)}/v/${escape(release.version)}</guid>
       <pubDate>${new Date(release.date).toUTCString()}</pubDate>
@@ -52,7 +52,7 @@ export function GET() {
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>ship-notes releases</title>
+    <title>${escape(title)}</title>
     <link>${escape(siteUrl)}</link>
     <description>Release notes</description>
     <atom:link href="${escape(siteUrl)}/feed.xml" rel="self" type="application/rss+xml"/>
