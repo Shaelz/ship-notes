@@ -10,7 +10,7 @@
   },
   "keywords": ["changelog", "release-notes", "cli", "static-site"],
   "engines": { "node": ">=18" },
-  "files": ["dist"],
+  "files": ["dist", "!dist/test"],
   "type": "module",
   "bin": {
     "ship-notes": "./dist/index.js"
