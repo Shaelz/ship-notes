@@ -1,3 +1,23 @@
+<script lang="ts">
+  import type { PageData } from './$types';
+
+  let { data }: { data: PageData } = $props();
+
+  const description =
+    'A CLI + static site tool that turns structured TOML release files into a human-readable changelog.';
+</script>
+
+<svelte:head>
+  <title>About | {data.siteTitle}</title>
+  <meta name="description" content={description} />
+  <meta property="og:title" content={`About | ${data.siteTitle}`} />
+  <meta property="og:description" content={description} />
+  {#if data.siteUrl}
+    <link rel="canonical" href={`${data.siteUrl}/about`} />
+    <meta property="og:url" content={`${data.siteUrl}/about`} />
+  {/if}
+</svelte:head>
+
 <article class="about">
 
   <header class="page-header">

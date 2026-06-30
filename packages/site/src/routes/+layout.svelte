@@ -5,6 +5,20 @@
   let { data, children }: { data: LayoutData; children: any } = $props();
 </script>
 
+<svelte:head>
+  <title>{data.siteTitle}</title>
+  <meta name="description" content={`Release notes for ${data.siteTitle}.`} />
+  <meta property="og:site_name" content={data.siteTitle} />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  {#if data.siteUrl}
+    <meta property="og:image" content={`${data.siteUrl}/og.png`} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:image" content={`${data.siteUrl}/og.png`} />
+  {/if}
+</svelte:head>
+
 <div class="layout">
   <nav class="sidebar">
     <div class="sidebar-header">
