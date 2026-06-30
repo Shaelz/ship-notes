@@ -1,5 +1,5 @@
 {
-  "name": "@ship-notes/cli",
+  "name": "ship-notes",
   "version": "0.1.0",
   "description": "CLI tool for writing and publishing structured release notes",
   "author": "Shaelz",

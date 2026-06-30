@@ -17,5 +17,5 @@ jobs:
           node-version: 20
           cache: pnpm
       - run: pnpm install
-      - run: pnpm --filter @ship-notes/cli build
-      - run: pnpm --filter @ship-notes/cli test
+      - run: pnpm --filter ship-notes build
+      - run: pnpm --filter ship-notes test

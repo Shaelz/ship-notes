@@ -22,9 +22,9 @@ changelog/         — generated output (ship-notes build)
 
 **CLI:**
 ```sh
-pnpm --filter @ship-notes/cli build   # compile TypeScript
-pnpm --filter @ship-notes/cli dev     # watch mode
-pnpm --filter @ship-notes/cli test    # run tests
+pnpm --filter ship-notes build   # compile TypeScript
+pnpm --filter ship-notes dev     # watch mode
+pnpm --filter ship-notes test    # run tests
 ```
 
 **Site:**
@@ -41,7 +41,7 @@ node packages/cli/dist/index.js validate # check all release files
 
 ## Tests
 
-Tests live in `packages/cli/src/test/` and use Node's built-in test runner — no extra dependencies. Run with `pnpm --filter @ship-notes/cli test`.
+Tests live in `packages/cli/src/test/` and use Node's built-in test runner — no extra dependencies. Run with `pnpm --filter ship-notes test`.
 
 Add tests for new logic in `schema.ts`, `semver.ts`, or any new utility module. CLI command integration (file I/O, process.argv) doesn't need unit tests — keep the test surface focused on pure functions.
 
@@ -65,5 +65,5 @@ git push origin v1.5.0
 ## Pull requests
 
 - One logical change per PR
-- Run `pnpm --filter @ship-notes/cli test` before pushing
+- Run `pnpm --filter ship-notes test` before pushing
 - Follow the existing commit prefix style (`feat:`, `fix:`, `chore:`, `refactor:`)
