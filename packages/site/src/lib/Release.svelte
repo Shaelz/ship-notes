@@ -153,11 +153,13 @@
   }
 
   .item-link {
-    font-size: 0.75rem;
+    font-size: 0.875rem;
     color: var(--color-text-muted);
     flex-shrink: 0;
-    opacity: 0.7;
+    opacity: 0.8;
     transition: opacity 120ms ease;
+    padding: 0 0.25rem;
+    line-height: 1;
   }
 
   .item-link:hover {
