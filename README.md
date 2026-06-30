@@ -4,6 +4,14 @@ Turn your git history into human-readable release notes.
 
 `git log` is for developers. Release notes are for users. ship-notes bridges that gap with taste and editorial control — no "AI wrote this" feel, no raw commit dumps.
 
+## Install
+
+```sh
+npm install -D ship-notes
+# or
+pnpm add -D ship-notes
+```
+
 ## How it works
 
 ship-notes reads structured release files you write (one per version), assembles them into a formatted changelog, and optionally publishes a static changelog site with version history and an RSS feed.
