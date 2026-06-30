@@ -166,10 +166,11 @@ Retro software release page — version numbers as large headers, sidebar versio
 
 ## Stack
 
-- **CLI**: Node.js, TypeScript, smol-toml, Zod
-- **Site**: SvelteKit, prerendered static output, adapter-static
+- **Core** (`@ship-notes/core`): TypeScript, smol-toml, Zod — release schema, parser, semver utilities
+- **CLI**: Node.js, depends on core
+- **Site**: SvelteKit, prerendered static output, adapter-static, depends on core
 - **Storage**: file-based, local-first, no database
 
 ## Status
 
-v1.0 shipped. See [ROADMAP.md](ROADMAP.md).
+v1.4 shipped. See [ROADMAP.md](ROADMAP.md).

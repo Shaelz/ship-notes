@@ -12,13 +12,20 @@ pnpm install
 
 ```
 packages/
-  cli/   — Node.js CLI (TypeScript, smol-toml, Zod)
-  site/  — SvelteKit changelog site (adapter-static, prerendered)
+  core/  — shared library: schema, parser, semver, section helpers (@ship-notes/core)
+  cli/   — Node.js CLI, depends on core
+  site/  — SvelteKit changelog site (adapter-static, prerendered), depends on core
 releases/          — ship-notes' own release TOML files
 changelog/         — generated output (ship-notes build)
 ```
 
 ## Development
+
+**Core** (build first — CLI and site both depend on it):
+```sh
+pnpm --filter @ship-notes/core build  # compile TypeScript
+pnpm --filter @ship-notes/core dev    # watch mode
+```
 
 **CLI:**
 ```sh
@@ -43,7 +50,7 @@ node packages/cli/dist/index.js validate # check all release files
 
 Tests live in `packages/cli/src/test/` and use Node's built-in test runner — no extra dependencies. Run with `pnpm --filter ship-notes test`.
 
-Add tests for new logic in `schema.ts`, `semver.ts`, or any new utility module. CLI command integration (file I/O, process.argv) doesn't need unit tests — keep the test surface focused on pure functions.
+Add tests for new logic in `packages/core/src/` (schema, semver, parse) or any new utility. CLI command integration (file I/O, process.argv) doesn't need unit tests — keep the test surface focused on pure functions.
 
 ## Adding a release
 
