@@ -1,21 +1,21 @@
 export type ReleaseItem = {
   text: string;
-  link?: string;
-  breaking?: boolean;
-  author?: string;
-  author_url?: string;
+  link?: string | undefined;
+  breaking?: boolean | undefined;
+  author?: string | undefined;
+  author_url?: string | undefined;
 };
 
 export type ReleaseSection = {
-  label?: string;
+  label?: string | undefined;
   items: ReleaseItem[];
 };
 
 export type Release = {
   version: string;
   date: string;
-  name?: string;
-  summary?: string;
+  name?: string | undefined;
+  summary?: string | undefined;
   sections: Record<string, ReleaseSection>;
 };
 

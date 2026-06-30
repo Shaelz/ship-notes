@@ -19,3 +19,4 @@ jobs:
       - run: pnpm install
       - run: pnpm --filter ship-notes build
       - run: pnpm --filter ship-notes test
+      - run: pnpm --filter @ship-notes/site typecheck
