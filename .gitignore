@@ -1,7 +1,7 @@
 **/node_modules/
 dist/
 *.js.map
-changelog/
+# changelog/ is intentionally committed in this repo to demonstrate the tool's output
 .svelte-kit/
 packages/site/build/
 
