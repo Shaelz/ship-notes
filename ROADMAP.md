@@ -23,13 +23,30 @@ Write once, render differently for end users vs. developers consuming an API.
 - [ ] `[audience]` block in `ship-notes.toml` — define named audiences
 - [ ] Per-item `audience = ["users", "developers"]` filter field
 - [ ] CLI flag: `ship-notes build --audience developers`
+- [ ] `ship-notes preview --audience <name>` — local dev server filtered to that audience
 - [ ] Site: audience switcher UI
 
 ## v1.2 — CLI completeness
 
 - [ ] `ship-notes open` — open the deployed changelog in the browser
+- [ ] `ship-notes diff <v1>..<v2>` — print what changed between two releases as Markdown (for GitHub release notes, Slack posts, etc.)
 - [ ] Email digest output (HTML, ready to paste into a mailer)
 - [ ] Non-Vercel hosting support (Netlify, GitHub Pages adapters) — for users not on Vercel auto-deploy
+
+## v1.3 — Onboarding & personality
+
+- [ ] `ship-notes init` — interactive wizard that scaffolds `ship-notes.toml` and `releases/` for a new project
+- [ ] Contributor credits per item — `author = "Gerben"` field, rendered as a small tag on the site and in Markdown output
+
+## v1.4 — Integrations
+
+- [ ] `ship-notes publish --github` — post the release to GitHub Releases via the API
+- [ ] `ship-notes notify` — send a formatted release summary to a configured Slack or Discord webhook
+
+## v1.5 — Monorepo support
+
+- [ ] `ship-notes.workspace.toml` — aggregates releases from sub-packages into a unified changelog view
+- [ ] Per-package release files with a combined site output
 
 ## v2.0 — Generation mode
 
@@ -45,7 +62,6 @@ Write once, render differently for end users vs. developers consuming an API.
 
 ## Deferred / maybe
 
-- Contributor credits per item
 - Date-based version schemes
 - Per-project vs. central multi-project tracking
 - Hosted changelog service (ship-notes.io or similar)

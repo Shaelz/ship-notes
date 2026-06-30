@@ -1,17 +1,27 @@
 #!/usr/bin/env node
 import { readdirSync, writeFileSync, mkdirSync } from "node:fs";
 import { resolve, join } from "node:path";
+import { execSync } from "node:child_process";
 import { parseReleaseFile, ParseError } from "./parse.js";
 import { renderChangelog } from "./render/markdown.js";
 import { compareSemver } from "./semver.js";
 import { add } from "./add.js";
 import { loadConfig } from "./config.js";
 
+function gitAuthorName(): string {
+  try {
+    return execSync("git config user.name", { encoding: "utf-8" }).trim();
+  } catch {
+    return "";
+  }
+}
+
 const [, , command = "help", ...args] = process.argv;
 
 function build(): void {
   const cwd = process.cwd();
   const config = loadConfig(cwd);
+  const defaultAuthor = config.default_author || gitAuthorName();
   const releasesDir = resolve(cwd, config.releases_dir ?? "releases");
 
   let files: string[];
@@ -33,6 +43,15 @@ function build(): void {
   for (const file of files) {
     try {
       const release = parseReleaseFile(join(releasesDir, file));
+      if (defaultAuthor) {
+        for (const section of Object.values(release.sections)) {
+          for (const item of section.items) {
+            if (!item.author) {
+              item.author = defaultAuthor;
+            }
+          }
+        }
+      }
       releases.push(release);
     } catch (err) {
       if (err instanceof ParseError) {

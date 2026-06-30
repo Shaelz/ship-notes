@@ -31,6 +31,13 @@
             {#if item.link}
               <a class="item-link" href={item.link} target="_blank" rel="noopener">#</a>
             {/if}
+            {#if item.author}
+              {#if item.link}
+                <a class="item-author" href={item.link} target="_blank" rel="noopener">{item.author}</a>
+              {:else}
+                <span class="item-author">{item.author}</span>
+              {/if}
+            {/if}
           </li>
         {/each}
       </ul>
@@ -145,6 +152,20 @@
   }
 
   .item-link:hover {
+    opacity: 1;
+    text-decoration: underline;
+  }
+
+  .item-author {
+    font-size: 0.65rem;
+    color: var(--color-text-muted);
+    opacity: 0.6;
+    flex-shrink: 0;
+    letter-spacing: 0.03em;
+    text-decoration: none;
+  }
+
+  .item-author:hover {
     opacity: 1;
     text-decoration: underline;
   }

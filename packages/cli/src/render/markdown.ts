@@ -43,7 +43,8 @@ function renderRelease(release: Release): string {
     for (const item of section.items) {
       const breaking = item.breaking ? " **[breaking]**" : "";
       const link = item.link ? ` ([#](${item.link}))` : "";
-      lines.push(`- ${item.text}${breaking}${link}`);
+      const author = item.author ? ` — ${item.author}` : "";
+      lines.push(`- ${item.text}${breaking}${link}${author}`);
     }
   }
 

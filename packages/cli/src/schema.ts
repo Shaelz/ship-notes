@@ -4,6 +4,7 @@ const Item = z.object({
   text: z.string().min(1, "Item text cannot be empty"),
   link: z.string().url("Item link must be a valid URL").optional(),
   breaking: z.boolean().optional(),
+  author: z.string().optional(),
 });
 
 const Section = z.object({
@@ -42,13 +43,7 @@ export const ReleaseSchema = z.object({
   name: z.string().optional(),
   summary: z.string().optional(),
   sections: z
-    .object({
-      new: Section.optional(),
-      fixed: Section.optional(),
-      changed: Section.optional(),
-      removed: Section.optional(),
-    })
-    .and(z.record(z.string(), Section))
+    .record(z.string(), Section)
     .refine(
       (sections) => Object.keys(sections).length > 0,
       "Release must have at least one section"

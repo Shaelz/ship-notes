@@ -2,6 +2,7 @@ export type ReleaseItem = {
   text: string;
   link?: string;
   breaking?: boolean;
+  author?: string;
 };
 
 export type ReleaseSection = {

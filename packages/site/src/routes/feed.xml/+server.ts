@@ -1,5 +1,6 @@
-import { loadReleases } from '$lib/releases.server';
+import { loadReleases, loadSiteConfig } from '$lib/releases.server';
 import { orderedSections } from '$lib/types';
+import { resolve } from 'node:path';
 
 export const prerender = true;
 
@@ -30,7 +31,8 @@ function releaseDescription(release: ReturnType<typeof loadReleases>[number]): s
 
 export function GET() {
   const releases = loadReleases();
-  const siteUrl = 'https://example.com'; // overridden by ship-notes.toml in future
+  const config = loadSiteConfig(resolve(process.cwd(), '../..'));
+  const siteUrl = config.url ?? 'https://example.com';
 
   const items = releases.map((release) => {
     const title = release.name

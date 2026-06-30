@@ -1,6 +1,6 @@
 import { readdirSync, writeFileSync, existsSync, mkdirSync } from "node:fs";
 import { resolve, join } from "node:path";
-import { parseSemver } from "./semver.js";
+import { parseSemver, compareSemver } from "./semver.js";
 import { parseReleaseFile } from "./parse.js";
 
 type BumpType = "patch" | "minor" | "major";
@@ -28,28 +28,15 @@ function latestVersion(releasesDir: string): string | null {
     return null;
   }
 
-  let latest: string | null = null;
+  const versions: string[] = [];
   for (const file of files) {
     try {
-      const release = parseReleaseFile(join(releasesDir, file));
-      if (!latest) {
-        latest = release.version;
-        continue;
-      }
-      const [aMaj, aMin, aPat] = parseSemver(release.version);
-      const [bMaj, bMin, bPat] = parseSemver(latest);
-      if (
-        aMaj > bMaj ||
-        (aMaj === bMaj && aMin > bMin) ||
-        (aMaj === bMaj && aMin === bMin && aPat > bPat)
-      ) {
-        latest = release.version;
-      }
+      versions.push(parseReleaseFile(join(releasesDir, file)).version);
     } catch {
       // skip invalid files
     }
   }
-  return latest;
+  return versions.sort(compareSemver)[0] ?? null;
 }
 
 function scaffold(version: string): string {
@@ -64,6 +51,7 @@ date = "${today}"
 
 [[sections.new.items]]
 text = ""
+# author = ""                 # optional, overrides default_author from ship-notes.toml
 
 # [sections.fixed]
 #
