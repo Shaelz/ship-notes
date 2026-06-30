@@ -24,6 +24,7 @@ jobs:
           node-version: 20
           cache: pnpm
       - run: pnpm install
+      - run: pnpm --filter @ship-notes/core build
       - run: pnpm --filter @ship-notes/site build
       - uses: actions/upload-pages-artifact@v3
         with:

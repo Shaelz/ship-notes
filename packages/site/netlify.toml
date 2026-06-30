@@ -1,5 +1,5 @@
 [build]
-  command       = "pnpm --filter @ship-notes/site build"
+  command       = "pnpm --filter @ship-notes/core build && pnpm --filter @ship-notes/site build"
   publish       = "packages/site/build"
   base          = "."
 
