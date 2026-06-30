@@ -6,6 +6,7 @@ import { parseReleaseFile, ParseError } from "./parse.js";
 import { renderChangelog } from "./render/markdown.js";
 import { compareSemver } from "./semver.js";
 import { add } from "./add.js";
+import { init } from "./init.js";
 import { loadConfig } from "./config.js";
 
 function gitAuthorName(): string {
@@ -78,6 +79,9 @@ function build(): void {
 }
 
 switch (command) {
+  case "init":
+    init();
+    break;
   case "build":
     build();
     break;
@@ -88,6 +92,7 @@ switch (command) {
     console.log("Usage: ship-notes <command>");
     console.log("");
     console.log("Commands:");
+    console.log("  init                                Set up ship-notes in a new project");
     console.log("  add [patch|minor|major|<version>]   Scaffold a new release file");
     console.log("  build                               Assemble releases/ into changelog/CHANGELOG.md");
 }

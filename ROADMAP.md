@@ -35,8 +35,8 @@ Write once, render differently for end users vs. developers consuming an API.
 
 ## v1.3 — Onboarding & personality
 
-- [ ] `ship-notes init` — interactive wizard that scaffolds `ship-notes.toml` and `releases/` for a new project
-- [ ] Contributor credits per item — `author = "Gerben"` field, rendered as a small tag on the site and in Markdown output
+- [x] `ship-notes init` — interactive wizard that scaffolds `ship-notes.toml` and `releases/` for a new project
+- [x] Contributor credits per item — `author` field, rendered as a linked tag on the site and in Markdown output
 
 ## v1.4 — Integrations
 

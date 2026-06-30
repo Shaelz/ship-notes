@@ -91,8 +91,24 @@ your-project/
 ## CLI
 
 ```sh
+ship-notes init                                # set up ship-notes in a new project
 ship-notes add [patch|minor|major|<version>]   # scaffold a new release file
 ship-notes build                               # assemble releases/ into changelog/CHANGELOG.md
+```
+
+### Getting started
+
+```sh
+cd your-project
+ship-notes init
+# → prompts for title, URL, repo, author
+# → writes ship-notes.toml and creates releases/
+
+ship-notes add 1.0.0
+# → creates releases/v1.0.0.toml, fill it in
+
+ship-notes build
+# → writes changelog/CHANGELOG.md
 ```
 
 ## Site
