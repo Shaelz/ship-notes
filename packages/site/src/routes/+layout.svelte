@@ -49,6 +49,24 @@
     overflow-y: auto;
     display: flex;
     flex-direction: column;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-border-strong) var(--color-sidebar);
+  }
+
+  .sidebar::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .sidebar::-webkit-scrollbar-track {
+    background: var(--color-sidebar);
+  }
+
+  .sidebar::-webkit-scrollbar-thumb {
+    background: var(--color-border-strong);
+  }
+
+  .sidebar::-webkit-scrollbar-thumb:hover {
+    background: var(--color-text-muted);
   }
 
   .sidebar-header {
