@@ -38,10 +38,10 @@ Write once, render differently for end users vs. developers consuming an API.
 - [x] `ship-notes init` — interactive wizard that scaffolds `ship-notes.toml` and `releases/` for a new project
 - [x] Contributor credits per item — `author` field, rendered as a linked tag on the site and in Markdown output
 
-## v1.4 — Integrations
+## v1.4 — Integrations ✓
 
-- [ ] `ship-notes publish --github` — post the release to GitHub Releases via the API
-- [ ] `ship-notes notify` — send a formatted release summary to a configured Slack or Discord webhook
+- [x] `ship-notes publish --github [<version>]` — post the release to GitHub Releases via the API (requires `GITHUB_TOKEN`)
+- [x] `ship-notes notify [<version>]` — send a formatted release summary to a configured Slack or Discord webhook (`notify_webhook` in config or `SHIP_NOTES_WEBHOOK` env var)
 
 ## v1.5 — Monorepo support
 

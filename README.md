@@ -62,6 +62,12 @@ Any section label can be overridden. Extra sections (e.g. `migration`, `known_is
 | `breaking` | boolean | no       | Marks the item as a breaking change              |
 | `author`   | string  | no       | Contributor credit — overrides `default_author`  |
 
+### publish & notify
+
+`ship-notes publish --github` requires a `GITHUB_TOKEN` env var with `contents: write` permission and `repo` set in `ship-notes.toml`.
+
+`ship-notes notify` sends to the webhook at `notify_webhook` in `ship-notes.toml` (or `SHIP_NOTES_WEBHOOK` env var). Slack and Discord webhooks are both supported — detected automatically from the URL.
+
 ## Project config (`ship-notes.toml`)
 
 ```toml
@@ -70,6 +76,7 @@ url            = "https://changelog.myproject.com"
 repo           = "https://github.com/user/repo"
 default_author = "Gerben"   # applied to all items without an explicit author field
                              # falls back to git config user.name if not set
+notify_webhook = "https://hooks.slack.com/..."  # or Discord webhook URL
 
 # releases_dir = "releases"   # default
 # output_dir   = "changelog"  # default
@@ -97,6 +104,8 @@ ship-notes build                               # assemble releases/ into changel
 ship-notes open                                # open the deployed changelog in the browser
 ship-notes diff [<version>|<v1>..<v2>]         # print release(s) as Markdown to stdout
 ship-notes digest [<version>]                  # write an HTML email digest to changelog/
+ship-notes publish --github [<version>]        # post a release to GitHub Releases
+ship-notes notify [<version>]                  # send a release summary to Slack or Discord
 ```
 
 ### Getting started

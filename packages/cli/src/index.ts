@@ -10,6 +10,8 @@ import { init } from "./init.js";
 import { open } from "./open.js";
 import { diff } from "./diff.js";
 import { digest } from "./digest.js";
+import { publish } from "./publish.js";
+import { notify } from "./notify.js";
 import { loadConfig } from "./config.js";
 
 function gitAuthorName(): string {
@@ -100,6 +102,15 @@ switch (command) {
   case "digest":
     digest(args[0]);
     break;
+  case "publish": {
+    const flags = args.filter((a) => a.startsWith('--'));
+    const versionArg = args.find((a) => !a.startsWith('--'));
+    publish(flags, versionArg);
+    break;
+  }
+  case "notify":
+    notify(args[0]);
+    break;
   default:
     console.log("Usage: ship-notes <command>");
     console.log("");
@@ -110,4 +121,6 @@ switch (command) {
     console.log("  open                                Open the deployed changelog in the browser");
     console.log("  diff [<version>|<v1>..<v2>]         Print release(s) as Markdown to stdout");
     console.log("  digest [<version>]                  Write an HTML email digest to changelog/");
+    console.log("  publish --github [<version>]         Post a release to GitHub Releases");
+    console.log("  notify [<version>]                  Send a release summary to Slack or Discord");
 }
