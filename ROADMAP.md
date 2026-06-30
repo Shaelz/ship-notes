@@ -43,7 +43,14 @@ Write once, render differently for end users vs. developers consuming an API.
 - [x] `ship-notes publish --github [<version>]` — post the release to GitHub Releases via the API (requires `GITHUB_TOKEN`)
 - [x] `ship-notes notify [<version>]` — send a formatted release summary to a configured Slack or Discord webhook (`notify_webhook` in config or `SHIP_NOTES_WEBHOOK` env var)
 
-## v1.5 — Monorepo support
+## v1.5 — CLI polish ✓
+
+- [x] `ship-notes preview` — start a local preview of the changelog site
+- [x] `ship-notes validate` — check all release files for schema errors (CI-friendly)
+- [x] `ship-notes latest` — print the latest version number (useful in scripts and pipelines)
+- [x] `ship-notes build --since <version>` — scope output to releases after a given version
+
+## v1.6 — Monorepo support (was v1.5)
 
 - [ ] `ship-notes.workspace.toml` — aggregates releases from sub-packages into a unified changelog view
 - [ ] Per-package release files with a combined site output

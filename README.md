@@ -100,8 +100,11 @@ your-project/
 ```sh
 ship-notes init                                # set up ship-notes in a new project
 ship-notes add [patch|minor|major|<version>]   # scaffold a new release file
-ship-notes build                               # assemble releases/ into changelog/CHANGELOG.md
+ship-notes build [--since <version>]           # assemble releases/ into changelog/CHANGELOG.md
+ship-notes validate                            # check all release files for errors (CI-friendly)
+ship-notes latest                              # print the latest version number
 ship-notes open                                # open the deployed changelog in the browser
+ship-notes preview                             # start a local preview of the changelog site
 ship-notes diff [<version>|<v1>..<v2>]         # print release(s) as Markdown to stdout
 ship-notes digest [<version>]                  # write an HTML email digest to changelog/
 ship-notes publish --github [<version>]        # post a release to GitHub Releases
