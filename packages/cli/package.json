@@ -1,6 +1,9 @@
 {
   "name": "@ship-notes/cli",
   "version": "0.1.0",
+  "description": "CLI tool for writing and publishing structured release notes",
+  "author": "Shaelz",
+  "license": "MIT",
   "type": "module",
   "bin": {
     "ship-notes": "./dist/index.js"

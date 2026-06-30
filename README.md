@@ -33,7 +33,7 @@ text = "Dark mode support across all pages"
 [[sections.new.items]]
 text = "Export to PDF"
 link = "https://github.com/user/repo/pull/42"
-author = "Gerben"
+author = "Your Name"
 
 [sections.changed]
 
@@ -74,7 +74,7 @@ Any section label can be overridden. Extra sections (e.g. `migration`, `known_is
 title          = "My Project"
 url            = "https://changelog.myproject.com"
 repo           = "https://github.com/user/repo"
-default_author     = "Gerben"                        # falls back to git config user.name
+default_author     = "Your Name"                     # falls back to git config user.name
 default_author_url = "https://github.com/user/repo"  # fallback link for author tags with no item link
 notify_webhook     = "https://hooks.slack.com/..."    # or Discord webhook URL
 
