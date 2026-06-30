@@ -1,6 +1,6 @@
 {
   "name": "ship-notes",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "CLI tool for writing and publishing structured release notes",
   "author": "Shaelz",
   "license": "MIT",

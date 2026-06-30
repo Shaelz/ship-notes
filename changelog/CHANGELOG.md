@@ -2,6 +2,25 @@
 
 
 
+## v1.5.0 — Site & reliability
+*2026-06-30*
+
+SEO-ready changelog site, config consistency fixes, and a round of correctness work across the deploy pipeline.
+
+### New
+
+- Changelog site now has proper page titles, meta descriptions, canonical URLs, and Open Graph tags on every page ([#](https://github.com/Shaelz/ship-notes/commit/f78f873)) — Shaelz
+- robots.txt and sitemap.xml generated automatically from your configured url when deployed ([#](https://github.com/Shaelz/ship-notes/commit/f78f873)) — Shaelz
+- OG preview image (/og.png) served with the site for social sharing ([#](https://github.com/Shaelz/ship-notes/commit/f78f873)) — Shaelz
+
+### Fixed
+
+- ship-notes add and ship-notes latest now respect releases_dir from config instead of always defaulting to releases/ ([#](https://github.com/Shaelz/ship-notes/commit/b35fa23)) — Shaelz
+- Hard-refreshing a deep URL (/about, /v/1.2.0, etc.) on Vercel no longer returns 404 ([#](https://github.com/Shaelz/ship-notes/commit/c871ec9)) — Shaelz
+- A malformed release TOML file in releases/ no longer crashes the site dev server — it logs a warning and skips that file ([#](https://github.com/Shaelz/ship-notes/commit/f3ce38c)) — Shaelz
+- Production site build was broken due to node:fs leaking into the browser bundle through an unshaken core re-export; fixed with a browser-safe entry point in @ship-notes/core ([#](https://github.com/Shaelz/ship-notes/commit/5388063)) — Shaelz
+- All deploy configs (Vercel, Netlify, GitHub Pages, npm publish) were missing the @ship-notes/core build step and would fail on a clean checkout ([#](https://github.com/Shaelz/ship-notes/commit/9d03416)) — Shaelz
+
 ## v1.4.0 — Polish
 *2026-06-30*
 

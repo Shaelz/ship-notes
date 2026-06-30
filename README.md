@@ -177,4 +177,4 @@ Retro software release page — version numbers as large headers, sidebar versio
 
 ## Status
 
-v1.4 shipped. See [ROADMAP.md](ROADMAP.md).
+v1.5 shipped. See [ROADMAP.md](ROADMAP.md).
