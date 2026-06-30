@@ -2,7 +2,7 @@ title = "ship-notes"
 url   = "https://ship-notes.gerbenvdvelde.nl"
 repo  = "https://github.com/Shaelz/ship-notes"
 
-default_author_url = "https://github.com/Shaelz"
+default_author_url = "https://github.com/Shaelz/ship-notes"
 
 # releases_dir = "releases"   # default
 # output_dir   = "changelog"  # default
