@@ -28,9 +28,6 @@
             {#if item.breaking}
               <span class="breaking-badge">breaking</span>
             {/if}
-            {#if item.link}
-              <a class="item-link" href={item.link} target="_blank" rel="noopener">#</a>
-            {/if}
             {#if item.author}
               {@const authorHref = item.link ?? item.author_url}
               {#if authorHref}
@@ -38,6 +35,8 @@
               {:else}
                 <span class="item-author">{item.author}</span>
               {/if}
+            {:else if item.link}
+              <a class="item-link" href={item.link} target="_blank" rel="noopener">↗</a>
             {/if}
           </li>
         {/each}
@@ -52,22 +51,25 @@
     align-items: baseline;
     gap: 1.25rem;
     flex-wrap: wrap;
-    margin-bottom: 2rem;
-    padding-bottom: 1.25rem;
-    border-bottom: 2px solid var(--color-border-strong);
+    margin-bottom: 1.75rem;
+    padding: 0.85rem 1rem;
+    border: 1px solid var(--color-border-strong);
+    background: var(--color-sidebar);
   }
 
   .release-version {
-    font-size: 2.4rem;
+    font-size: 1.5rem;
     font-weight: 700;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.01em;
     line-height: 1;
   }
 
   .release-name {
-    font-size: 0.9rem;
-    font-weight: 400;
+    font-size: 0.8rem;
+    font-weight: 700;
     color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
     align-self: center;
   }
 
@@ -80,7 +82,7 @@
   }
 
   .release-summary {
-    font-size: 0.9rem;
+    font-size: 0.875rem;
     line-height: 1.7;
     color: var(--color-text-muted);
     border-left: 3px solid var(--color-border-strong);
@@ -93,18 +95,23 @@
   }
 
   .section-label {
-    font-size: 0.6rem;
+    font-size: 0.7rem;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.25em;
+    letter-spacing: 0.2em;
     color: var(--color-text-muted);
-    margin: 0;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid var(--color-border-strong);
+    margin: 0 0 0.5rem;
+    padding: 0.2rem 0.5rem;
+    border: 1px solid var(--color-border-strong);
+    display: inline-block;
   }
+
+  .section-label::before { content: '[ '; }
+  .section-label::after  { content: ' ]'; }
 
   .item-list {
     list-style: none;
+    margin-top: 0.25rem;
   }
 
   .item {
@@ -146,27 +153,31 @@
   }
 
   .item-link {
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     color: var(--color-text-muted);
     flex-shrink: 0;
-    opacity: 0.5;
+    opacity: 0.7;
+    transition: opacity 120ms ease;
   }
 
   .item-link:hover {
     opacity: 1;
-    text-decoration: underline;
   }
 
   .item-author {
     font-size: 0.65rem;
     color: var(--color-text-muted);
-    opacity: 0.6;
     flex-shrink: 0;
     letter-spacing: 0.03em;
     text-decoration: none;
   }
 
-  .item-author:hover {
+  a.item-author {
+    opacity: 0.75;
+    transition: opacity 120ms ease;
+  }
+
+  a.item-author:hover {
     opacity: 1;
     text-decoration: underline;
   }

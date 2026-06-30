@@ -20,9 +20,6 @@
             {/if}
             <span class="version-date">{release.date}</span>
           </a>
-          {#if i === 0}
-            <span class="badge">current</span>
-          {/if}
         </li>
       {/each}
     </ul>
@@ -87,18 +84,20 @@
   }
 
   .version-list li {
-    position: relative;
     border-bottom: 1px solid var(--color-border);
+    border-left: 3px solid transparent;
+    transition: background 120ms ease;
   }
 
   .version-list li.current {
     background: var(--color-bg);
+    border-left-color: var(--color-current-dot);
   }
 
   .version-list a {
     display: flex;
     flex-direction: column;
-    padding: 0.75rem 1.25rem;
+    padding: 0.75rem 1.25rem 0.75rem 1rem;
     gap: 0.15rem;
   }
 
@@ -112,6 +111,10 @@
     letter-spacing: 0.03em;
   }
 
+  .version-list li.current .version-number {
+    color: var(--color-current-dot);
+  }
+
   .version-name {
     font-size: 0.7rem;
     color: var(--color-text-muted);
@@ -120,20 +123,6 @@
   .version-date {
     font-size: 0.65rem;
     color: var(--color-text-muted);
-    opacity: 0.7;
-  }
-
-  .badge {
-    position: absolute;
-    right: 1rem;
-    top: 0.9rem;
-    font-size: 0.55rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    padding: 0.15rem 0.4rem;
-    border: 1px solid var(--color-current-dot);
-    color: var(--color-current-dot);
   }
 
   .content {
