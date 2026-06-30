@@ -62,7 +62,7 @@ Write once, render differently for end users vs. developers consuming an API.
 
 ## Technical debt
 
-- Social preview image — GitHub repo has no OG image; a simple branded card would improve shareability.
+(none currently tracked)
 
 ## Deferred / maybe
 
