@@ -1,6 +1,7 @@
 import { readdirSync, writeFileSync, existsSync, mkdirSync } from "node:fs";
 import { resolve, join } from "node:path";
 import { parseSemver, compareSemver, parseReleaseFile } from "@ship-notes/core";
+import { loadConfig } from "./config.js";
 
 type BumpType = "patch" | "minor" | "major";
 
@@ -72,7 +73,8 @@ text = ""
 
 export function add(arg: string = "patch"): void {
   const cwd = process.cwd();
-  const releasesDir = resolve(cwd, "releases");
+  const config = loadConfig(cwd);
+  const releasesDir = resolve(cwd, config.releases_dir);
 
   let nextVersion: string;
 

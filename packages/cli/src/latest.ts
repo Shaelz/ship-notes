@@ -12,7 +12,7 @@ export function latest(): void {
   try {
     files = readdirSync(releasesDir).filter((f) => f.endsWith('.toml'));
   } catch {
-    console.error('Error: releases/ directory not found');
+    console.error(`Error: ${config.releases_dir}/ directory not found`);
     process.exit(1);
   }
 
