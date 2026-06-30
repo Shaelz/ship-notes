@@ -63,12 +63,13 @@ Any section label can be overridden. Extra sections (e.g. `migration`, `known_is
 
 ### Item fields
 
-| Field      | Type    | Required | Description                                      |
-|------------|---------|----------|--------------------------------------------------|
-| `text`     | string  | yes      | The human-readable change description            |
-| `link`     | string  | no       | URL to the pull request, issue, or reference     |
-| `breaking` | boolean | no       | Marks the item as a breaking change              |
-| `author`   | string  | no       | Contributor credit — overrides `default_author`  |
+| Field        | Type    | Required | Description                                                      |
+|--------------|---------|----------|------------------------------------------------------------------|
+| `text`       | string  | yes      | The human-readable change description                            |
+| `link`       | string  | no       | URL to the pull request, issue, or reference                     |
+| `breaking`   | boolean | no       | Marks the item as a breaking change                              |
+| `author`     | string  | no       | Contributor credit — overrides `default_author`                  |
+| `author_url` | string  | no       | Profile link for the author tag; falls back to `default_author_url` |
 
 ### publish & notify
 
@@ -147,6 +148,7 @@ pnpm --filter @ship-notes/site dev
 **Production build** — prerenders all release pages to static HTML:
 
 ```sh
+pnpm --filter @ship-notes/core build   # required first — site depends on core
 pnpm --filter @ship-notes/site build
 ```
 
@@ -159,6 +161,8 @@ The site outputs static files and deploys anywhere that serves HTML.
 **Netlify** — `packages/site/netlify.toml` is included. Connect the repo and push.
 
 **GitHub Pages** — `.github/workflows/deploy-pages.yml` is included. Enable Pages in repo settings (source: GitHub Actions), then push.
+
+All three configs build `@ship-notes/core` first and handle the correct build order automatically. The deployed site generates `robots.txt`, `sitemap.xml`, and an OG preview image (`/og.png`) from your `ship-notes.toml` config.
 
 ## Aesthetic
 

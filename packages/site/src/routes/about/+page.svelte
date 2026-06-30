@@ -89,9 +89,10 @@ summary = "Optional one-line summary shown above the changelog."
 [sections.new]
 
 [[sections.new.items]]
-text   = "Added something great"
-link   = "https://github.com/you/repo/commit/abc123"
-author = "yourname"
+text       = "Added something great"
+link       = "https://github.com/you/repo/commit/abc123"
+author     = "yourname"
+author_url = "https://github.com/yourname"
 
 [[sections.new.items]]
 text     = "Removed old API"
@@ -102,6 +103,7 @@ breaking = true
 [[sections.fixed.items]]
 text = "Fixed a bug"</pre>
     <p class="doc-p">Standard section keys: <code>new</code>, <code>fixed</code>, <code>changed</code>, <code>removed</code>. Any custom key also works.</p>
+    <p class="doc-p">Item fields: <code>text</code> (required), <code>link</code>, <code>breaking</code>, <code>author</code>, <code>author_url</code>. Author tags link to <code>link</code> if set, then <code>author_url</code>, then <code>default_author_url</code>.</p>
   </section>
 
   <section class="doc-section">
