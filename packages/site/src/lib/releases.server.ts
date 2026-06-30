@@ -45,9 +45,20 @@ export function loadReleases(config?: SiteConfig, releasesDir?: string): Release
   const releases: Release[] = [];
   for (const file of files) {
     const raw = readFileSync(join(dir, file), 'utf-8');
-    const parsed = parseTOML(raw);
+
+    let parsed: unknown;
+    try {
+      parsed = parseTOML(raw);
+    } catch (err) {
+      console.warn(`Skipping ${file}: invalid TOML — ${err instanceof Error ? err.message : err}`);
+      continue;
+    }
+
     const result = ReleaseSchema.safeParse(parsed);
-    if (!result.success) continue;
+    if (!result.success) {
+      console.warn(`Skipping ${file}: ${result.error.issues.map((i) => i.message).join(', ')}`);
+      continue;
+    }
     const release = result.data;
     if (cfg.default_author) {
       for (const section of Object.values(release.sections)) {
