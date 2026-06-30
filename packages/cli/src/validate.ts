@@ -6,18 +6,18 @@ import { loadConfig } from './config.js';
 export function validate(): void {
   const cwd = process.cwd();
   const config = loadConfig(cwd);
-  const releasesDir = resolve(cwd, config.releases_dir || 'releases');
+  const releasesDir = resolve(cwd, config.releases_dir);
 
   let files: string[];
   try {
     files = readdirSync(releasesDir).filter((f) => f.endsWith('.toml'));
   } catch {
-    console.error(`Error: no releases/ directory found.`);
+    console.error(`Error: ${config.releases_dir}/ directory not found`);
     process.exit(1);
   }
 
   if (files.length === 0) {
-    console.error(`Error: no .toml files found in releases/`);
+    console.error(`Error: no .toml files found in ${config.releases_dir}/`);
     process.exit(1);
   }
 

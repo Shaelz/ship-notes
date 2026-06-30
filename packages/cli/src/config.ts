@@ -16,7 +16,7 @@ const ConfigSchema = z.object({
 
 export type Config = z.infer<typeof ConfigSchema>;
 
-export type ResolvedConfig = Required<Config>;
+export type ResolvedConfig = { [K in keyof Config]-?: NonNullable<Config[K]> };
 
 const DEFAULTS: ResolvedConfig = {
   title: 'Releases',

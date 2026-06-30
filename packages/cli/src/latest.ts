@@ -7,13 +7,13 @@ import { loadConfig } from './config.js';
 export function latest(): void {
   const cwd = process.cwd();
   const config = loadConfig(cwd);
-  const releasesDir = resolve(cwd, config.releases_dir || 'releases');
+  const releasesDir = resolve(cwd, config.releases_dir);
 
   let files: string[];
   try {
     files = readdirSync(releasesDir).filter((f) => f.endsWith('.toml'));
   } catch {
-    console.error('Error: no releases/ directory found.');
+    console.error('Error: releases/ directory not found');
     process.exit(1);
   }
 
@@ -27,7 +27,7 @@ export function latest(): void {
   }
 
   if (versions.length === 0) {
-    console.error('Error: no valid releases found.');
+    console.error('Error: no valid releases found');
     process.exit(1);
   }
 

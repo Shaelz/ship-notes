@@ -1,18 +1,10 @@
 import { spawn } from 'node:child_process';
-import { resolve, join } from 'node:path';
+import { join, resolve } from 'node:path';
 import { existsSync } from 'node:fs';
 
 export function preview(): void {
   const cwd = process.cwd();
 
-  // find the site package root relative to where ship-notes is installed
-  const candidates = [
-    resolve(cwd, 'packages/site'),
-    resolve(cwd, '../site'),
-    resolve(cwd, 'node_modules/.bin/..'),
-  ];
-
-  // walk up looking for packages/site from cwd
   let siteDir: string | null = null;
   let dir = cwd;
   for (let i = 0; i < 5; i++) {
@@ -31,7 +23,7 @@ export function preview(): void {
     process.exit(1);
   }
 
-  console.log(`Starting preview server…`);
+  console.log('Starting preview server…');
 
   const child = spawn('pnpm', ['dev'], {
     cwd: siteDir,

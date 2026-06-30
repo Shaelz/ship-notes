@@ -1,9 +1,7 @@
-import { readdirSync } from 'node:fs';
-import { resolve, join } from 'node:path';
-import { parseReleaseFile, ParseError } from './parse.js';
+import { resolve } from 'node:path';
 import { renderChangelog } from './render/markdown.js';
-import { compareSemver } from './semver.js';
 import { loadConfig } from './config.js';
+import { loadReleasesOrExit, applyDefaultAuthor } from './releases.js';
 
 function parseGithubRepo(repoUrl: string): { owner: string; repo: string } | null {
   const match = repoUrl.match(/github\.com\/([^/]+)\/([^/]+?)(?:\.git)?$/);
@@ -32,35 +30,9 @@ async function publishToGithub(versionArg?: string): Promise<void> {
     process.exit(1);
   }
 
-  const releasesDir = resolve(cwd, config.releases_dir || 'releases');
-  let files: string[];
-  try {
-    files = readdirSync(releasesDir).filter((f) => f.endsWith('.toml'));
-  } catch {
-    console.error('Error: no releases/ directory found.');
-    process.exit(1);
-  }
-
-  const releases = [];
-  for (const file of files) {
-    try {
-      releases.push(parseReleaseFile(join(releasesDir, file)));
-    } catch (err) {
-      if (err instanceof ParseError) { console.error(err.message); process.exit(1); }
-      throw err;
-    }
-  }
-  releases.sort((a, b) => compareSemver(a.version, b.version));
-
-  if (config.default_author) {
-    for (const release of releases) {
-      for (const section of Object.values(release.sections)) {
-        for (const item of section.items) {
-          if (!item.author) item.author = config.default_author;
-        }
-      }
-    }
-  }
+  const releasesDir = resolve(cwd, config.releases_dir);
+  const releases = loadReleasesOrExit(releasesDir);
+  applyDefaultAuthor(releases, config);
 
   const version = versionArg?.replace(/^v/, '');
   const release = version ? releases.find((r) => r.version === version) : releases[0];
@@ -81,11 +53,7 @@ async function publishToGithub(versionArg?: string): Promise<void> {
       'Content-Type': 'application/json',
       'X-GitHub-Api-Version': '2022-11-28',
     },
-    body: JSON.stringify({
-      tag_name: `v${release.version}`,
-      name,
-      body,
-    }),
+    body: JSON.stringify({ tag_name: `v${release.version}`, name, body }),
   });
 
   if (!res.ok) {

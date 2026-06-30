@@ -1,11 +1,10 @@
-import { readdirSync } from 'node:fs';
-import { resolve, join } from 'node:path';
-import { parseReleaseFile, ParseError } from './parse.js';
-import { compareSemver } from './semver.js';
+import { resolve } from 'node:path';
 import { loadConfig } from './config.js';
+import { loadReleasesOrExit, applyDefaultAuthor } from './releases.js';
 import { SECTION_DEFAULTS, SECTION_ORDER, type StandardSectionKey } from './schema.js';
+import type { Release } from './schema.js';
 
-function formatSummary(release: ReturnType<typeof parseReleaseFile>, siteUrl: string): string {
+function formatSummary(release: Release, siteUrl: string): string {
   const title = release.name
     ? `v${release.version} — ${release.name}`
     : `v${release.version}`;
@@ -62,25 +61,9 @@ export function notify(versionArg?: string): void {
     process.exit(1);
   }
 
-  const releasesDir = resolve(cwd, config.releases_dir || 'releases');
-  let files: string[];
-  try {
-    files = readdirSync(releasesDir).filter((f) => f.endsWith('.toml'));
-  } catch {
-    console.error('Error: no releases/ directory found.');
-    process.exit(1);
-  }
-
-  const releases = [];
-  for (const file of files) {
-    try {
-      releases.push(parseReleaseFile(join(releasesDir, file)));
-    } catch (err) {
-      if (err instanceof ParseError) { console.error(err.message); process.exit(1); }
-      throw err;
-    }
-  }
-  releases.sort((a, b) => compareSemver(a.version, b.version));
+  const releasesDir = resolve(cwd, config.releases_dir);
+  const releases = loadReleasesOrExit(releasesDir);
+  applyDefaultAuthor(releases, config);
 
   const version = versionArg?.replace(/^v/, '');
   const release = version ? releases.find((r) => r.version === version) : releases[0];
@@ -89,7 +72,7 @@ export function notify(versionArg?: string): void {
     process.exit(1);
   }
 
-  const text = formatSummary(release, config.url || '');
+  const text = formatSummary(release, config.url);
   send(webhook, text).then(() => {
     console.log(`Notified: v${release.version}`);
   }).catch((err) => {
