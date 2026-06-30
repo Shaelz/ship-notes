@@ -172,7 +172,7 @@
 
   .sidebar-footer {
     border-top: 1px solid var(--color-border);
-    padding: 0.75rem 1.25rem;
+    padding: 0.75rem 1.25rem 1.5rem;
     display: flex;
     flex-direction: column;
     gap: 0.4rem;
