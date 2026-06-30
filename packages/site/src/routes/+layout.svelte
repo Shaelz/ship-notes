@@ -57,26 +57,23 @@
     position: sticky;
     top: 0;
     height: 100vh;
-    overflow-y: auto;
     display: flex;
     flex-direction: column;
-    scrollbar-width: thin;
-    scrollbar-color: var(--color-border-strong) var(--color-sidebar);
   }
 
-  .sidebar::-webkit-scrollbar {
+  .version-list::-webkit-scrollbar {
     width: 4px;
   }
 
-  .sidebar::-webkit-scrollbar-track {
+  .version-list::-webkit-scrollbar-track {
     background: var(--color-sidebar);
   }
 
-  .sidebar::-webkit-scrollbar-thumb {
+  .version-list::-webkit-scrollbar-thumb {
     background: var(--color-border-strong);
   }
 
-  .sidebar::-webkit-scrollbar-thumb:hover {
+  .version-list::-webkit-scrollbar-thumb:hover {
     background: var(--color-text-muted);
   }
 
@@ -111,6 +108,10 @@
   .version-list {
     list-style: none;
     flex: 1;
+    overflow-y: auto;
+    min-height: 0;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-border-strong) var(--color-sidebar);
   }
 
   .version-list li {
