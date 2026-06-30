@@ -6,16 +6,16 @@
 </script>
 
 <article class="release">
-  <header class="release-header">
-    <h1 class="release-version">v{release.version}</h1>
+  <header class="page-header">
+    <h1 class="page-header-title">v{release.version}</h1>
     {#if release.name}
-      <span class="release-name">{release.name}</span>
+      <span class="page-header-subtitle">{release.name}</span>
     {/if}
-    <time class="release-date" datetime={release.date}>{release.date}</time>
+    <time class="page-header-date" datetime={release.date}>{release.date}</time>
   </header>
 
   {#if release.summary}
-    <p class="release-summary">{release.summary}</p>
+    <p class="page-summary">{release.summary}</p>
   {/if}
 
   {#each orderedSections(release) as { label, section }}
@@ -46,68 +46,9 @@
 </article>
 
 <style>
-  .release-header {
-    display: flex;
-    align-items: baseline;
-    gap: 1.25rem;
-    flex-wrap: wrap;
-    margin-bottom: 1.75rem;
-    padding: 0.85rem 1rem;
-    border: 1px solid var(--color-border-strong);
-    background: var(--color-sidebar);
-  }
-
-  .release-version {
-    font-size: 1.5rem;
-    font-weight: 700;
-    letter-spacing: -0.01em;
-    line-height: 1;
-  }
-
-  .release-name {
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: var(--color-text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    align-self: center;
-  }
-
-  .release-date {
-    font-size: 0.75rem;
-    color: var(--color-text-muted);
-    margin-left: auto;
-    align-self: center;
-    letter-spacing: 0.04em;
-  }
-
-  .release-summary {
-    font-size: 0.875rem;
-    line-height: 1.7;
-    color: var(--color-text-muted);
-    border-left: 3px solid var(--color-border-strong);
-    padding-left: 1rem;
-    margin-bottom: 2.5rem;
-  }
-
   .release-section {
     margin-bottom: 2.5rem;
   }
-
-  .section-label {
-    font-size: 0.7rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    color: var(--color-text-muted);
-    margin: 0 0 0.5rem;
-    padding: 0.2rem 0.5rem;
-    border: 1px solid var(--color-border-strong);
-    display: inline-block;
-  }
-
-  .section-label::before { content: '[ '; }
-  .section-label::after  { content: ' ]'; }
 
   .item-list {
     list-style: none;
