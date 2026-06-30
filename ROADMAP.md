@@ -48,7 +48,7 @@ Write once, render differently for end users vs. developers consuming an API.
 - [x] `ship-notes preview` — start a local preview of the changelog site
 - [x] `ship-notes validate` — check all release files for schema errors (CI-friendly)
 - [x] `ship-notes latest` — print the latest version number (useful in scripts and pipelines)
-- [x] `ship-notes build --since <version>` — scope output to releases after a given version
+- [x] `ship-notes build --since <version>` — scope output to releases at or after a given version
 
 ## v1.6 — Monorepo support (was v1.5)
 
