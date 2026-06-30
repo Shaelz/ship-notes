@@ -1,0 +1,18 @@
+version = "1.3.0"
+date    = "2026-06-30"
+name    = "Integrations"
+summary = "Post releases to GitHub and notify your team on Slack or Discord with a single command."
+
+[sections.new]
+
+[[sections.new.items]]
+text = "ship-notes publish --github [version] — posts a release to GitHub Releases via the API"
+link = "https://github.com/Shaelz/ship-notes/commit/55dcc12"
+
+[[sections.new.items]]
+text = "ship-notes notify [version] — sends a formatted release summary to a Slack or Discord webhook"
+link = "https://github.com/Shaelz/ship-notes/commit/55dcc12"
+
+[[sections.new.items]]
+text = "notify_webhook config field — set in ship-notes.toml or via SHIP_NOTES_WEBHOOK env var"
+link = "https://github.com/Shaelz/ship-notes/commit/55dcc12"

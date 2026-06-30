@@ -1,0 +1,22 @@
+version = "1.2.0"
+date    = "2026-06-30"
+name    = "CLI Completeness"
+summary = "A full command surface for the common release workflow — view, diff, share, and deploy."
+
+[sections.new]
+
+[[sections.new.items]]
+text = "ship-notes open — opens the configured changelog URL in the system browser"
+link = "https://github.com/Shaelz/ship-notes/commit/3a8f633"
+
+[[sections.new.items]]
+text = "ship-notes diff [version|v1..v2] — prints release(s) as Markdown to stdout, ready to paste into GitHub release notes or Slack"
+link = "https://github.com/Shaelz/ship-notes/commit/3a8f633"
+
+[[sections.new.items]]
+text = "ship-notes digest [version] — writes an HTML email digest to changelog/, table-based layout ready to paste into any mailer"
+link = "https://github.com/Shaelz/ship-notes/commit/3a8f633"
+
+[[sections.new.items]]
+text = "Netlify deployment config (netlify.toml) and GitHub Pages workflow included out of the box"
+link = "https://github.com/Shaelz/ship-notes/commit/3a8f633"

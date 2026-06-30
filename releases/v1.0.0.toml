@@ -1,0 +1,32 @@
+version = "1.0.0"
+date    = "2026-06-30"
+name    = "Credits"
+summary = "Contributor credits, author linking, and a major internal cleanup. The site is now a single shared component."
+
+[sections.new]
+
+[[sections.new.items]]
+text = "Author credits per item — author field on release items, shown as a linked tag on the site"
+link = "https://github.com/Shaelz/ship-notes/commit/9195ad0"
+
+[[sections.new.items]]
+text = "default_author config — falls back to git config user.name when not set"
+link = "https://github.com/Shaelz/ship-notes/commit/9195ad0"
+
+[[sections.new.items]]
+text = "default_author_url — fallback link for author tags when no commit link is present"
+link = "https://github.com/Shaelz/ship-notes/commit/301a21a"
+
+[sections.changed]
+
+[[sections.changed.items]]
+text = "Site release view extracted into a shared Release.svelte component — eliminates duplicated markup between index and version pages"
+link = "https://github.com/Shaelz/ship-notes/commit/362c828"
+
+[[sections.changed.items]]
+text = "RSS feed title now reads from ship-notes.toml instead of being hardcoded"
+link = "https://github.com/Shaelz/ship-notes/commit/362c828"
+
+[[sections.changed.items]]
+text = "loadSiteConfig called once per request — no longer duplicated between feed and release loader"
+link = "https://github.com/Shaelz/ship-notes/commit/362c828"

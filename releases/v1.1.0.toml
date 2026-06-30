@@ -1,0 +1,14 @@
+version = "1.1.0"
+date    = "2026-06-30"
+name    = "Init"
+summary = "Bootstrap a new project with a single command."
+
+[sections.new]
+
+[[sections.new.items]]
+text = "ship-notes init — interactive wizard that scaffolds ship-notes.toml and releases/ in a new project"
+link = "https://github.com/Shaelz/ship-notes/commit/17538da"
+
+[[sections.new.items]]
+text = "Prompts for title, URL, repo, and default author — falls back to git config for repo URL and author name"
+link = "https://github.com/Shaelz/ship-notes/commit/17538da"

@@ -1,0 +1,22 @@
+version = "1.4.0"
+date    = "2026-06-30"
+name    = "Polish"
+summary = "CI-friendly validation, pipeline-ready version output, local preview, and scoped changelog builds."
+
+[sections.new]
+
+[[sections.new.items]]
+text = "ship-notes validate — checks all release files for schema errors, exits non-zero on failure"
+link = "https://github.com/Shaelz/ship-notes/commit/940a3de"
+
+[[sections.new.items]]
+text = "ship-notes latest — prints the latest version number to stdout, useful in CI pipelines and shell scripts"
+link = "https://github.com/Shaelz/ship-notes/commit/940a3de"
+
+[[sections.new.items]]
+text = "ship-notes preview — starts the local SvelteKit dev server from anywhere in the project tree"
+link = "https://github.com/Shaelz/ship-notes/commit/940a3de"
+
+[[sections.new.items]]
+text = "ship-notes build --since <version> — scopes changelog output to releases at or after the given version"
+link = "https://github.com/Shaelz/ship-notes/commit/940a3de"

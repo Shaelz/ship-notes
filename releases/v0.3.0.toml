@@ -1,0 +1,26 @@
+version = "0.3.0"
+date    = "2026-06-29"
+name    = "Ship It"
+summary = "Deployment and site polish. The changelog is now live at ship-notes.gerbenvdvelde.nl."
+
+[sections.new]
+
+[[sections.new.items]]
+text = "Vercel deployment with auto-deploy on push to main"
+link = "https://github.com/Shaelz/ship-notes/commit/642b05c"
+
+[[sections.new.items]]
+text = "Favicon — >_ on dark background"
+link = "https://github.com/Shaelz/ship-notes/commit/4f223bd"
+
+[sections.changed]
+
+[[sections.changed.items]]
+text = "Site URL updated to ship-notes.gerbenvdvelde.nl"
+link = "https://github.com/Shaelz/ship-notes/commit/80dcee0"
+
+[sections.fixed]
+
+[[sections.fixed.items]]
+text = "Index page now renders the latest release directly instead of redirecting"
+link = "https://github.com/Shaelz/ship-notes/commit/54bd7a3"
