@@ -1,4 +1,3 @@
-import { resolve } from 'node:path';
 import { renderChangelog } from './render/markdown.js';
 import { loadConfig } from './config.js';
 import { loadReleasesOrExit, applyDefaultAuthor } from './releases.js';
@@ -30,8 +29,7 @@ async function publishToGithub(versionArg?: string): Promise<void> {
     process.exit(1);
   }
 
-  const releasesDir = resolve(cwd, config.releases_dir);
-  const releases = loadReleasesOrExit(releasesDir);
+  const releases = loadReleasesOrExit(config, cwd);
   applyDefaultAuthor(releases, config);
 
   const version = versionArg?.replace(/^v/, '');

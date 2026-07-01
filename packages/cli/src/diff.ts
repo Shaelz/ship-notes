@@ -1,14 +1,12 @@
-import { resolve } from 'node:path';
-import { renderChangelog } from './render/markdown.js';
 import { compareSemver } from '@ship-notes/core';
+import { renderChangelog } from './render/markdown.js';
 import { loadConfig } from './config.js';
 import { loadReleasesOrExit, applyDefaultAuthor } from './releases.js';
 
 export function diff(arg?: string): void {
   const cwd = process.cwd();
   const config = loadConfig(cwd);
-  const releasesDir = resolve(cwd, config.releases_dir);
-  const all = loadReleasesOrExit(releasesDir);
+  const all = loadReleasesOrExit(config, cwd);
   applyDefaultAuthor(all, config);
 
   if (!arg) {

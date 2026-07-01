@@ -7,8 +7,7 @@ import { loadReleasesOrExit, applyDefaultAuthor } from './releases.js';
 export function digest(versionArg?: string): void {
   const cwd = process.cwd();
   const config = loadConfig(cwd);
-  const releasesDir = resolve(cwd, config.releases_dir);
-  const releases = loadReleasesOrExit(releasesDir);
+  const releases = loadReleasesOrExit(config, cwd);
   applyDefaultAuthor(releases, config);
 
   const version = versionArg?.replace(/^v/, '');

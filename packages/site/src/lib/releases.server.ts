@@ -3,7 +3,7 @@ import { execSync } from 'node:child_process';
 import { resolve, join } from 'node:path';
 import { parse as parseTOML } from 'smol-toml';
 import { z } from 'zod';
-import { ReleaseSchema, compareSemver } from '@ship-notes/core';
+import { ReleaseSchema, compareSemver, applyDefaultAuthor } from '@ship-notes/core';
 import type { Release } from '@ship-notes/core';
 
 const SiteConfigSchema = z.object({
@@ -59,17 +59,9 @@ export function loadReleases(config?: SiteConfig, releasesDir?: string): Release
       console.warn(`Skipping ${file}: ${result.error.issues.map((i) => i.message).join(', ')}`);
       continue;
     }
-    const release = result.data;
-    if (cfg.default_author) {
-      for (const section of Object.values(release.sections)) {
-        for (const item of section.items) {
-          if (!item.author) item.author = cfg.default_author;
-          if (!item.author_url && cfg.default_author_url) item.author_url = cfg.default_author_url;
-        }
-      }
-    }
-    releases.push(release);
+    releases.push(result.data);
   }
 
+  applyDefaultAuthor(releases, cfg);
   return releases.sort((a, b) => compareSemver(a.version, b.version));
 }

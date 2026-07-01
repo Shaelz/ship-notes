@@ -1,4 +1,3 @@
-import { resolve } from 'node:path';
 import { loadConfig } from './config.js';
 import { loadReleasesOrExit, applyDefaultAuthor } from './releases.js';
 import { orderedSections, type Release } from '@ship-notes/core';
@@ -59,8 +58,7 @@ export function notify(versionArg?: string): void {
     process.exit(1);
   }
 
-  const releasesDir = resolve(cwd, config.releases_dir);
-  const releases = loadReleasesOrExit(releasesDir);
+  const releases = loadReleasesOrExit(config, cwd);
   applyDefaultAuthor(releases, config);
 
   const version = versionArg?.replace(/^v/, '');

@@ -1,18 +1,9 @@
 import { readdirSync, writeFileSync, mkdirSync } from 'node:fs';
 import { resolve, join } from 'node:path';
-import { execSync } from 'node:child_process';
 import { parseReleaseFile, ParseError, compareSemver } from '@ship-notes/core';
 import { renderChangelog } from './render/markdown.js';
 import { applyDefaultAuthor } from './releases.js';
 import { loadConfig } from './config.js';
-
-function gitAuthorName(): string {
-  try {
-    return execSync('git config user.name', { encoding: 'utf-8' }).trim();
-  } catch {
-    return '';
-  }
-}
 
 export function parseSinceFlag(args: string[]): string | undefined {
   const eqForm = args.find((a) => a.startsWith('--since='))?.slice('--since='.length);
@@ -25,11 +16,6 @@ export function build(args: string[]): void {
 
   const cwd = process.cwd();
   const config = loadConfig(cwd);
-
-  if (!config.default_author) {
-    config.default_author = gitAuthorName();
-  }
-
   const releasesDir = resolve(cwd, config.releases_dir);
 
   let files: string[];
