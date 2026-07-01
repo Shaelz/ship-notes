@@ -139,10 +139,14 @@ ship-notes build
 
 The changelog site is a SvelteKit static site in `packages/site`. It reads `releases/*.toml` directly.
 
+To use the site for your own project, clone or fork this repo (not just `npm install ship-notes`) and replace `ship-notes.toml` and `releases/` with your own. `packages/site` isn't published as part of the npm package, so it's only available inside a checkout of this repo.
+
 **Development** — the site reads release files live on every request, no build step needed:
 
 ```sh
 pnpm --filter @ship-notes/site dev
+# or, from anywhere inside the repo:
+ship-notes preview
 ```
 
 **Production build** — prerenders all release pages to static HTML:

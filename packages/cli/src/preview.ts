@@ -19,7 +19,10 @@ export function preview(): void {
   }
 
   if (!siteDir) {
-    console.error('Error: could not find packages/site. Run ship-notes preview from your project root.');
+    console.error(
+      'Error: could not find packages/site. ship-notes preview only works inside a clone or fork of ' +
+      'the ship-notes repo (it starts the SvelteKit site in packages/site) — see the Site section of the README.'
+    );
     process.exit(1);
   }
 
