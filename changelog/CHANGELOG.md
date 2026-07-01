@@ -2,6 +2,19 @@
 
 
 
+## v1.5.1 — Consistency fixes
+*2026-07-01*
+
+A round of correctness fixes found during a full audit: a crashing flag, dropped author links, and inconsistent behavior across commands.
+
+### Fixed
+
+- ship-notes build --since=v1.2.0 no longer crashes — the = form now strips the v prefix the same way the space-separated form does — [Shaelz](https://github.com/Shaelz/ship-notes/commit/829e444)
+- Markdown changelogs, GitHub release bodies, and HTML digests now link author credit via author_url, matching the site — [Shaelz](https://github.com/Shaelz/ship-notes/commit/0fb2091)
+- ship-notes notify now uses Discord's bold syntax for Discord webhooks instead of Slack's, which Discord was rendering as italic — [Shaelz](https://github.com/Shaelz/ship-notes/commit/63ab67c)
+- diff, digest, publish, and notify now respect releases_dir in error messages and fall back to git config user.name for authorship, matching build and the site — [Shaelz](https://github.com/Shaelz/ship-notes/commit/0f6234b)
+- ship-notes preview now explains it requires a clone or fork of the repo instead of implying a cwd mistake — [Shaelz](https://github.com/Shaelz/ship-notes/commit/fb3b386)
+
 ## v1.5.0 — Site & reliability
 *2026-06-30*
 
