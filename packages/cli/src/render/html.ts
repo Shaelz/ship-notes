@@ -17,8 +17,14 @@ export function renderDigest(release: Release): string {
 
     const items = section.items.map((item) => {
       const breaking = item.breaking ? ' <strong>[breaking]</strong>' : '';
-      const link = item.link ? ` <a href="${e(item.link)}">#</a>` : '';
-      const author = item.author ? ` — ${item.author}` : '';
+      const authorHref = item.author ? item.link ?? item.author_url : undefined;
+      const author = item.author
+        ? authorHref
+          ? ` — <a href="${e(authorHref)}">${e(item.author)}</a>`
+          : ` — ${e(item.author)}`
+        : '';
+      // Only show the standalone reference marker when there's no author link to carry it.
+      const link = !item.author && item.link ? ` <a href="${e(item.link)}">#</a>` : '';
       return `      <li style="margin:0.4em 0;">${e(item.text)}${breaking}${link}${author}</li>`;
     }).join('\n');
 
