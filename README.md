@@ -162,7 +162,7 @@ The site outputs static files and deploys anywhere that serves HTML.
 
 **GitHub Pages** — `.github/workflows/deploy-pages.yml` is included. Enable Pages in repo settings (source: GitHub Actions), then push.
 
-All three configs build `@ship-notes/core` first and handle the correct build order automatically. The deployed site generates `robots.txt`, `sitemap.xml`, and an OG preview image (`/og.png`) from your `ship-notes.toml` config.
+All three configs build `@ship-notes/core` first and handle the correct build order automatically. The deployed site generates `robots.txt` and `sitemap.xml` from your `ship-notes.toml` config. `/og.png` is a static asset (`packages/site/static/og.png`) — replace it with your own social preview image before deploying.
 
 ## Aesthetic
 
