@@ -14,9 +14,14 @@ function gitAuthorName(): string {
   }
 }
 
+export function parseSinceFlag(args: string[]): string | undefined {
+  const eqForm = args.find((a) => a.startsWith('--since='))?.slice('--since='.length);
+  const spaceForm = args.includes('--since') ? args[args.indexOf('--since') + 1] : undefined;
+  return (eqForm ?? spaceForm)?.replace(/^v/, '');
+}
+
 export function build(args: string[]): void {
-  const since = args.find((a) => a.startsWith('--since='))?.slice('--since='.length)
-    ?? (args.includes('--since') ? args[args.indexOf('--since') + 1] : undefined)?.replace(/^v/, '');
+  const since = parseSinceFlag(args);
 
   const cwd = process.cwd();
   const config = loadConfig(cwd);
