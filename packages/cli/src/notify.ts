@@ -3,19 +3,26 @@ import { loadConfig } from './config.js';
 import { loadReleasesOrExit, applyDefaultAuthor } from './releases.js';
 import { orderedSections, type Release } from '@ship-notes/core';
 
-function formatSummary(release: Release, siteUrl: string): string {
+function isDiscordWebhook(webhook: string): boolean {
+  return webhook.includes('discord.com');
+}
+
+// Slack bolds with *text*; Discord treats a single asterisk as italics and needs **text**.
+export function formatSummary(release: Release, siteUrl: string, isDiscord: boolean): string {
+  const bold = (text: string) => (isDiscord ? `**${text}**` : `*${text}*`);
+
   const title = release.name
     ? `v${release.version} — ${release.name}`
     : `v${release.version}`;
 
   const url = siteUrl ? `${siteUrl}/v/${release.version}` : '';
-  const header = url ? `*${title}*  ${url}` : `*${title}*`;
+  const header = url ? `${bold(title)}  ${url}` : bold(title);
 
   const lines: string[] = [header, release.date];
   if (release.summary) lines.push('', release.summary);
 
   for (const { label, section } of orderedSections(release)) {
-    lines.push('', `*${label}*`);
+    lines.push('', bold(label));
     for (const item of section.items) {
       const breaking = item.breaking ? ' [breaking]' : '';
       lines.push(`• ${item.text}${breaking}`);
@@ -26,7 +33,7 @@ function formatSummary(release: Release, siteUrl: string): string {
 }
 
 async function send(webhook: string, text: string): Promise<void> {
-  const isDiscord = webhook.includes('discord.com');
+  const isDiscord = isDiscordWebhook(webhook);
   const body = isDiscord ? { content: text } : { text };
 
   const res = await fetch(webhook, {
@@ -63,7 +70,7 @@ export function notify(versionArg?: string): void {
     process.exit(1);
   }
 
-  const text = formatSummary(release, config.url);
+  const text = formatSummary(release, config.url, isDiscordWebhook(webhook));
   send(webhook, text).then(() => {
     console.log(`Notified: v${release.version}`);
   }).catch((err) => {
